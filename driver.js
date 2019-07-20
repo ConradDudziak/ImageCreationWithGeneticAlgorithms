@@ -26,8 +26,8 @@ function prepareImage() {
 	referenceCanvas.width = workingSize;
 	referenceCanvas.height = workingSize;
 	
-	referenceContext.drawImage(referenceImage, 0, 0, 350, 350, 0, 0, 75, 75);
-	/*
+	referenceContext.drawImage(referenceImage, 0, 0, 350, 350, 0, 0, workingSize, workingSize);
+	
 	var imageData = referenceContext.getImageData(0, 0, workingSize, workingSize).data;
 	
 	
@@ -43,7 +43,7 @@ function prepareImage() {
 	referenceContext.drawImage(referenceImage, 0, 0);
 	//highestFitness = 0;
 	//lowestFitness = 100;
-	*/
+	
 }
 
 function configuration() {
