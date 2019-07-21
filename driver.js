@@ -23,7 +23,7 @@ function runSimulation() {
 	population = new Population(workingSize, workingSize,
 								polygons, vertices, 
 								workingContext, mutationRate, populationSize);
-	//population.evolve(outputContext, imageRes, imageRes);
+	population.evolve(outputContext, imageRes, imageRes);
 }
 
 function startSimulation() {

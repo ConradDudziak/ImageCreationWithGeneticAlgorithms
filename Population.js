@@ -41,23 +41,30 @@ class Population {
 
 		// Based on fitness, each member will get added to the mating pool a certain number of times
 		for (let i = 0; i < this.population.length; i++) {
-			let fitness = map(this.population[i].fitness, 0, maxFitness, 0, 1);
+			let fitness = rescale(this.population[i].fitness, 0, maxFitness, 0, 1);
 			let n = floor(fitness * 100);
 			for (let j = 0; j < n; j++) { 
 				this.matingPool.push(this.population[i]);
 			}
 		}
 	}
+	
+	rescale(value, minA, maxA, minB, maxB) {
+		var valuesRatio = ((value - minA) / (maxA - minA));
+		var ratioMinB = valuesRatio * minB;
+		var ratioMaxB = valuesRatio * maxB;
+		return (1 - ratioMinB + ratioMaxB);
+	}
 
 	// Create a new generation
 	generate() {
 		// Refill the population with children from the mating pool
-		print(this.matingPool);
 		for (let i = 0; i < this.population.length; i++) {
 			let a = floor(random(this.matingPool.length));
+			let b = floor(random(this.matingPool.length));
 			let partnerA = this.matingPool[a];
-			let child = partnerA.crossover();
-			child.mutate(this.mutationRate);
+			let partnerB = this.matingPool[b];
+			let child = partnerA.crossover(partnerB);
 			this.population[i] = child;
 		}
 		this.generations++;
@@ -102,10 +109,10 @@ class Population {
 	}
 	
 	evolve(outputContext, width, height) {
-		population.naturalSelection();
-		population.generate();
-		population.calcFitness();
-		population.evaluate();
+		this.naturalSelection();
+		this.generate();
+		this.calcFitness();
+		this.evaluate();
 		this.displayData(outputContext, width, height);
 	}
 	

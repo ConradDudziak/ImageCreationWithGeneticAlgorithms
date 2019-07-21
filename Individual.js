@@ -14,6 +14,7 @@ class Individual {
 	}
 
 	// Fitness function
+	// Larger fitness is more fit
 	calcFitness(workingContext, width, height) {
 		this.draw(workingContext, width, height);
 		
@@ -27,7 +28,6 @@ class Individual {
 		}
 		
 		this.fitness = 1 - diff / (width * height * 4 * 256 * 256);
-		console.log(this.fitness);
 	}
 
 	// Crossover
