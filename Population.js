@@ -12,7 +12,7 @@ class Population {
 
 		this.population = [];
 		for (let i = 0; i < populationSize; i++) {
-			this.population[i] = new Individual(width, height, polygonCount, vertexCount);
+			this.population[i] = new Individual(polygonCount, vertexCount);
 		}
 
 		//this.calcFitness();
