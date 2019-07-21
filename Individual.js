@@ -41,14 +41,14 @@ class Individual {
 			var parentVertices = currentParentPolygon.getVertices();
 			var childVertices = currentChildPolygon.getVertices();
 			
-			currentChildPolygon.setRed(mutate(currentParentPolygon.getRed()));
-			currentChildPolygon.setGreen(mutate(currentParentPolygon.getGreen()));
-			currentChildPolygon.setBlue(mutate(currentParentPolygon.getBlue()));
-			currentChildPolygon.setAlpha(mutate(currentParentPolygon.getAlpha()));
+			currentChildPolygon.setRed(this.mutate(currentParentPolygon.getRed()));
+			currentChildPolygon.setGreen(this.mutate(currentParentPolygon.getGreen()));
+			currentChildPolygon.setBlue(this.mutate(currentParentPolygon.getBlue()));
+			currentChildPolygon.setAlpha(this.mutate(currentParentPolygon.getAlpha()));
 			
 			for (var j = 0; j < parentVertices.length; j++) {
-				childVertices[j].setX(mutate(parentVertices[j].getX()));
-				childVertices[j].setY(mutate(parentVertices[j].getY()));
+				childVertices[j].setX(this.mutate(parentVertices[j].getX()));
+				childVertices[j].setY(this.mutate(parentVertices[j].getY()));
 			}
 		}
 		return child;

@@ -64,7 +64,7 @@ class Population {
 			let b = Math.floor(Math.random() * this.matingPool.length);
 			let partnerA = this.matingPool[a];
 			let partnerB = this.matingPool[b];
-			let child = partnerA.crossover(partnerB);
+			let child = partnerA.crossover(partnerB, this.mutationRate);
 			this.population[i] = child;
 		}
 		this.generations++;
