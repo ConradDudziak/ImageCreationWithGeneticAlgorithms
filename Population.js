@@ -25,11 +25,11 @@ class Population {
 	*/
 	
 	evolve(workingContext, workingSize, outputContext, outputSize) {
-		var best = getBest();
+		var best = this.getBest();
 		if (best == null) {
 			console.log("Best was not set. Cannot evolve.")
 		} else {
-			getBest().draw(outputContext, outputSize, outputSize);
+			this.getBest().draw(outputContext, outputSize, outputSize);
 		}
 	}
 
