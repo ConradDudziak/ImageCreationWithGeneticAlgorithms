@@ -60,8 +60,8 @@ class Population {
 	generate() {
 		// Refill the population with children from the mating pool
 		for (let i = 0; i < this.population.length; i++) {
-			let a = Math.floor(random(this.matingPool.length));
-			let b = Math.floor(random(this.matingPool.length));
+			let a = Math.floor(Math.random() * this.matingPool.length);
+			let b = Math.floor(Math.random() * this.matingPool.length);
 			let partnerA = this.matingPool[a];
 			let partnerB = this.matingPool[b];
 			let child = partnerA.crossover(partnerB);
