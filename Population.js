@@ -109,11 +109,13 @@ class Population {
 	}
 	
 	evolve(outputContext, width, height) {
-		this.naturalSelection();
-		this.generate();
-		this.calcFitness();
-		this.evaluate();
-		this.displayData(outputContext, width, height);
+		while (!this.isFinished()) {
+			this.naturalSelection();
+			this.generate();
+			this.calcFitness();
+			this.evaluate();
+			this.displayData(outputContext, width, height);
+		}
 	}
 	
 	displayData(outputContext, width, height) {
