@@ -57,7 +57,7 @@ class Individual {
 	mutate(value, mutationRate) {
 		var result = value;
 		if (Math.random() < mutationRate) {
-			result = value + Math.random() * 0.1 * 2 - 0.1);
+			result = value + Math.random() * 0.1 * 2 - 0.1;
 		
 			if (result < 0) {
 				result = 0;
