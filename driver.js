@@ -20,9 +20,10 @@ var geneSize;
 var dnaLength;
 
 function runSimulation() {
-	population = new Population(polygons, vertices, 
-								referenceContext, mutationRate, populationSize);
-	population.evolve(workingSize, imageRes);
+	population = new Population(workingSize, workingSize,
+								polygons, vertices, 
+								workingContext, mutationRate, populationSize);
+	//population.evolve(outputContext, imageRes, imageRes);
 }
 
 function startSimulation() {

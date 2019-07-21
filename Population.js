@@ -1,10 +1,10 @@
 class Population {
-	constructor(polygonCount, vertexCount, target, mutationRate, populationSize) {
+	constructor(width, height, polygonCount, vertexCount, workingContext, mutationRate, populationSize) {
 		this.population; // Array to hold the current population
 		this.matingPool = []; // ArrayList which we will use for our "mating pool"
 		this.generations = 0; // Number of generations
 		this.finished = false; // Are we finished evolving?
-		this.target = target; // Target polygon
+		this.workingContext = workingContext; // Target context
 		this.mutationRate = mutationRate; // Mutation rate
 		this.perfectScore = 1;
 
@@ -15,28 +15,13 @@ class Population {
 			this.population[i] = new Individual(polygonCount, vertexCount);
 		}
 
-		//this.calcFitness();
-	}
-	
-	/*
-	drawAnIndividual(canvasContext) {
-		this.population[0].draw(canvasContext);
-	}
-	*/
-	
-	evolve(workingContext, workingSize, outputContext, outputSize) {
-		var best = this.getBest();
-		if (best == null) {
-			console.log("Best was not set. Cannot evolve.")
-		} else {
-			this.getBest().draw(outputContext, outputSize, outputSize);
-		}
+		this.calcFitness();
 	}
 
 	// Fill our fitness array with a value for every member of the population
 	calcFitness() {
 		for (let i = 0; i < this.population.length; i++) {
-			this.population[i].calcFitness(target);
+			this.population[i].calcFitness(this.workingContext, this.width, this.height);
 		}
 	}
 
@@ -76,7 +61,6 @@ class Population {
 		this.generations++;
 	}
 
-
 	getBest() {
 		return this.best;
 	}
@@ -92,7 +76,7 @@ class Population {
 			}
 		}
 
-		this.best = this.population[index].getPolygon();
+		this.best = this.population[index];
 		if (worldrecord === this.perfectScore) {
 			this.finished = true;
 		}
@@ -113,5 +97,22 @@ class Population {
 			total += this.population[i].fitness;
 		}
 		return total / (this.population.length);
+	}
+	
+	evolve(outputContext, width, height) {
+		population.naturalSelection();
+		population.generate();
+		population.calcFitness();
+		population.evaluate();
+		this.displayData(outputContext, width, height);
+	}
+	
+	displayData(outputContext, width, height) {
+		var best = this.getBest();
+		if (best == null) {
+			console.log("Best was not set. Cannot evolve.")
+		} else {
+			this.getBest().draw(outputContext, width, height);
+		}
 	}
 }

@@ -23,17 +23,32 @@ class Polygon {
 	getRed() {
 		return this.red;
 	}
+	
+	setRed(red) {
+		this.red = red;
+	}
 
 	getGreen() {
 		return this.green;
 	}
-
+	
+	setGreen(green) {
+		this.green = green;
+	}
+	
 	getBlue() {
 		return this.blue;
+	}
+	
+	setBlue(blue) {
+		this.blue = blue;
 	}
 
 	getAlpha() {
 		return this.alpha;
 	}
-  
+	
+ 	setAlpha(alpha) {
+		this.alpha = alpha;
+	}
 }
