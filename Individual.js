@@ -34,7 +34,7 @@ class Individual {
 	crossover(partner, mutationRate) {
 		var child = new Individual(this.polygonCount, this.vertexCount);
 		
-		for (var i = 0; i < polygonCount; i++) {
+		for (var i = 0; i < this.polygonCount; i++) {
 			var currentParent = (Math.random() < 0.5) ? this : partner;
 			var currentParentPolygon = currentParent.genes.getPolygons()[i];
 			var currentChildPolygon = child.genes.getPolygons()[i];
