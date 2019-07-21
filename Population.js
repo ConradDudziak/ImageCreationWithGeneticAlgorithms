@@ -1,5 +1,7 @@
 class Population {
 	constructor(width, height, polygonCount, vertexCount, workingContext, mutationRate, populationSize) {
+		this.width = width;
+		this.height = height;
 		this.population; // Array to hold the current population
 		this.matingPool = []; // ArrayList which we will use for our "mating pool"
 		this.generations = 0; // Number of generations
