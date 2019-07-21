@@ -42,7 +42,7 @@ class Population {
 		// Based on fitness, each member will get added to the mating pool a certain number of times
 		for (let i = 0; i < this.population.length; i++) {
 			let fitness = this.rescale(this.population[i].fitness, 0, maxFitness, 0, 1);
-			let n = floor(fitness * 100);
+			let n = Math.floor(fitness * 100);
 			for (let j = 0; j < n; j++) { 
 				this.matingPool.push(this.population[i]);
 			}
@@ -60,8 +60,8 @@ class Population {
 	generate() {
 		// Refill the population with children from the mating pool
 		for (let i = 0; i < this.population.length; i++) {
-			let a = floor(random(this.matingPool.length));
-			let b = floor(random(this.matingPool.length));
+			let a = Math.floor(random(this.matingPool.length));
+			let b = Math.floor(random(this.matingPool.length));
 			let partnerA = this.matingPool[a];
 			let partnerB = this.matingPool[b];
 			let child = partnerA.crossover(partnerB);
