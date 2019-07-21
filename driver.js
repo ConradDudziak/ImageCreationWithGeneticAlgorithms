@@ -19,8 +19,6 @@ var vertices;
 var geneSize;
 var dnaLength;
 
-// dnaLength = polygons * (4 + vertices * 2);
-
 function runSimulation() {
 	population = new Population(polygons, vertices, 
 								referenceContext, mutationRate, populationSize);

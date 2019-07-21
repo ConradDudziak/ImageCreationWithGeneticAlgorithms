@@ -8,7 +8,7 @@ class Population {
 		this.mutationRate = mutationRate; // Mutation rate
 		this.perfectScore = 1;
 
-		this.best; //new Illustration();
+		this.best = null;
 
 		this.population = [];
 		for (let i = 0; i < populationSize; i++) {
@@ -25,7 +25,12 @@ class Population {
 	*/
 	
 	evolve(workingContext, workingSize, outputContext, outputSize) {
-		getBest().draw(outputContext, outputSize, outputSize);
+		var best = getBest();
+		if (best == null) {
+			console.log("Best was not set. Cannot evolve.")
+		} else {
+			getBest().draw(outputContext, outputSize, outputSize);
+		}
 	}
 
 	// Fill our fitness array with a value for every member of the population

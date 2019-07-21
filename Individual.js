@@ -30,6 +30,6 @@ class Individual {
 	}
 	
 	draw(canvasContext, width, height) {
-		this.genes.draw(canvasContext);
+		this.genes.draw(canvasContext, width, height);
 	}
 }
