@@ -10,6 +10,8 @@ var workingContext;
 var workingSize;
 var workingData;
 
+var imageRes;
+
 var mutationRate;
 var populationSize;
 var polygons;
@@ -17,16 +19,27 @@ var vertices;
 var geneSize;
 var dnaLength;
 
+// dnaLength = polygons * (4 + vertices * 2);
+
+function runSimulation() {
+	population = new Population(polygons, vertices, 
+								referenceContext, mutationRate, populationSize);
+	population.evolve(workingSize, imageRes);
+}
+
+function startSimulation() {
+	runSimulation();
+}
+
 function setImage(src) {
-	referenceImage.onload = prepareImage();
+	referenceImage.onload = prepareImage;
 	referenceImage.src = src;
 }
 
 function prepareImage() {
 	referenceCanvas.width = workingSize;
 	referenceCanvas.height = workingSize;
-	
-	referenceContext.drawImage(referenceImage, 0, 0, 350, 350, 0, 0, workingSize, workingSize);
+	referenceContext.drawImage(referenceImage, 0, 0, imageRes, imageRes, 0, 0, workingSize, workingSize);
 	
 	var imageData = referenceContext.getImageData(0, 0, workingSize, workingSize).data;
 	
@@ -38,8 +51,8 @@ function prepareImage() {
 		workingData[i] = imageData[i];
 	}
 	
-	referenceCanvas.width = 350;
-	referenceCanvas.height = 350;
+	referenceCanvas.width = imageRes;
+	referenceCanvas.height = imageRes;
 	referenceContext.drawImage(referenceImage, 0, 0);
 	//highestFitness = 0;
 	//lowestFitness = 100;
@@ -47,7 +60,11 @@ function prepareImage() {
 }
 
 function configuration() {
-	workingSize = 75;
+	imageRes = 350;
+	workingSize = 75; // Cannot be greater than imageRes
+	
+	populationSize = 50;
+	polygons = 125;
 	vertices = 3;
 	mutationRate = 0.01;
 	geneSize = 1;
@@ -73,6 +90,8 @@ function boot() {
 	configuration();
 	
 	prepareImage();
+	
+	startSimulation();
 }
 
-window.onload = this.boot();
+window.onload = this.boot;
