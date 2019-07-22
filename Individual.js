@@ -67,7 +67,6 @@ class Individual {
 				childVertices[j].setX(this.mutate(parentVertices[j].getX(), mutationRate));
 				childVertices[j].setY(this.mutate(parentVertices[j].getY(), mutationRate));
 			}
-			console.log(i);
 		}
 		return child;
 	}
@@ -75,15 +74,11 @@ class Individual {
 	// Mutate a value with a chance of mutationRate.
 	// If the value is not mutated, the value is returned unchanged.
 	mutate(value, mutationRate) {
-		console.log("--The mutation rate is: " + mutationRate);
 		var result = value;
 		if (Math.random() < mutationRate) {
 			result = value + Math.random() * 0.1 * 2 - 0.1;
 			// Clamp result between 0 and 1.
 			result = Math.min(Math.max(result, 0), 1);
-		}
-		if (result != value) {
-			console.log("MUTATED!!!!!!!!!!!!!!!!!!!!!!!!!");
 		}
 		return result;
 	}
