@@ -85,6 +85,7 @@ class Individual {
 		console.log("--Trying to mutate: " + value);
 		var result = value;
 		if (Math.random() < mutationRate) {
+			console.log("Trying to Mutate waaaaaaaaaaaaaaaa");
 			result = value + Math.random() * 0.1 * 2 - 0.1;
 			// Clamp result between 0 and 1.
 			result = Math.min(Math.max(result, 0), 1);
