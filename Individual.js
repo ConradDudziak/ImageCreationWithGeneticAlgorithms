@@ -56,30 +56,40 @@ class Individual {
 			
 			// Set the color values of the child polygon to be the mutated values of
 			// the parents polygon.
+			console.log("--Set Red--");
 			currentChildPolygon.setRed(this.mutate(currentParentPolygon.getRed()));
+			console.log("--Set Green--");
 			currentChildPolygon.setGreen(this.mutate(currentParentPolygon.getGreen()));
+			console.log("--Set Blue--");
 			currentChildPolygon.setBlue(this.mutate(currentParentPolygon.getBlue()));
+			console.log("--Set Alpha--");
 			currentChildPolygon.setAlpha(this.mutate(currentParentPolygon.getAlpha()));
 			
 			// Set the vertex values of the child polygon to be the mutated values of
 			// the parents polygon.
+			console.log("--Set Vertices--");
 			for (var j = 0; j < parentVertices.length; j++) {
+				console.log("--Set X--");
 				childVertices[j].setX(this.mutate(parentVertices[j].getX()));
+				console.log("--Set Y--");
 				childVertices[j].setY(this.mutate(parentVertices[j].getY()));
 			}
 		}
+		console.log(child);
 		return child;
 	}
 	
 	// Mutate a value with a chance of mutationRate.
 	// If the value is not mutated, the value is returned unchanged.
 	mutate(value, mutationRate) {
+		console.log("Trying to mutate: " + value);
 		var result = value;
 		if (Math.random() < mutationRate) {
 			result = value + Math.random() * 0.1 * 2 - 0.1;
 			// Clamp result between 0 and 1.
 			result = Math.min(Math.max(result, 0), 1);
 		}
+		console.log("Result: " + result);
 		return result;
 	}
 	
