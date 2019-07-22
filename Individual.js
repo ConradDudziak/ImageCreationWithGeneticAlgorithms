@@ -18,7 +18,7 @@ class Individual {
 		this.draw(dataContext, width, height);
 		
 		// Retrieve the image data of this individal from the dataContext
-		var myImageData = targetData;//dataContext.getImageData(0, 0, width, height).data;
+		var myImageData = dataContext.getImageData(0, 0, width, height).data;
 		
 		var sum = 0;
 		
@@ -32,8 +32,6 @@ class Individual {
 		// Calculate the fitness of this individual by calculating the largest
 		// possible difference and subtracting the ratio from 1.
 		this.fitness = 1 - (sum / (width * height * 4 * 255 * 255));
-		console.log("My image data: " + myImageData);
-		console.log("My fitness: " + this.fitness);
 	}
 
 	// Breed this individual with the partner individual, and return a child individual.

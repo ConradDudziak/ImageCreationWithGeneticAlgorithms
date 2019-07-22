@@ -8,8 +8,8 @@ var inputImageRes;
 
 var dataCanvas;
 var dataContext;
+var dataSize;
 
-var targetSize;
 var targetData;
 
 var mutationRate;
@@ -17,26 +17,29 @@ var populationSize;
 var polygons;
 var vertices;
 
+// Create an instance of the population and iterate
+// over its generations.
 function startGeneticAlgorithm() {
-	population = new Population(targetSize, targetSize,
+	population = new Population(dataSize, dataSize,
 								polygons, vertices,
 								targetData, dataContext, 
 								mutationRate, populationSize);
-	//function iterate() {
+	function iterate() {
 		population.generate(outputContext, inputImageRes, inputImageRes);
-	//}
-	//setInterval(iterate, 0);
+	}
+	setInterval(iterate, 0);
 }
 
-function setupdataCanvas() {
-	inputCanvas.width = targetSize;
-	inputCanvas.height = targetSize;
-	inputContext.drawImage(inputImage, 0, 0, inputImageRes, inputImageRes, 0, 0, targetSize, targetSize);
+// Sets the targetData by scaling the inputImage to the dataCanvas.
+function setupDataCanvas() {
+	inputCanvas.width = dataSize;
+	inputCanvas.height = dataSize;
+	inputContext.drawImage(inputImage, 0, 0, inputImageRes, inputImageRes, 0, 0, dataSize, dataSize);
 	
-	var rescaledImageData = inputContext.getImageData(0, 0, targetSize, targetSize).data;
+	var rescaledImageData = inputContext.getImageData(0, 0, dataSize, dataSize).data;
 	
 	targetData = [];
-	for (var i = 0; i < targetSize * targetSize * 4; i++) {
+	for (var i = 0; i < dataSize * dataSize * 4; i++) {
 		targetData[i] = rescaledImageData[i];
 	}
 	
@@ -45,21 +48,24 @@ function setupdataCanvas() {
 	inputContext.drawImage(inputImage, 0, 0);	
 }
 
+// Initializes all GA parameters.
 function configuration() {
 	inputImageRes = 350;
-	targetSize = 75; // Cannot be greater than inputImageRes
+	dataSize = 75; // Cannot be greater than inputImageRes
 	
 	populationSize = 50;
 	polygons = 125;
 	vertices = 3;
 	mutationRate = 0.01;
 	
-	dataCanvas.width = targetSize;
-	dataCanvas.height = targetSize;
-    dataCanvas.style.width = targetSize;
-    dataCanvas.style.height = targetSize;
+	dataCanvas.width = dataSize;
+	dataCanvas.height = dataSize;
+    dataCanvas.style.width = dataSize;
+    dataCanvas.style.height = dataSize;
 }
 
+// Initilizes all html canvas elements, configures data parameters,
+// and then starts the genetic algorithm.
 function boot() {
 	outputCanvas = document.getElementById("outputCanvas");
 	outputContext = outputCanvas.getContext('2d');
@@ -73,7 +79,7 @@ function boot() {
 	
 	configuration();
 	
-	setupdataCanvas();
+	setupDataCanvas();
 	
 	startGeneticAlgorithm();
 }
