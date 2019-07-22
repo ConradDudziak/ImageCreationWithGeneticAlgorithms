@@ -18,7 +18,7 @@ class Individual {
 		this.draw(dataContext, width, height);
 		
 		// Retrieve the image data of this individal from the dataContext
-		var myImageData = dataContext.getImageData(0, 0, width, height).data;
+		var myImageData = targetData;//dataContext.getImageData(0, 0, width, height).data;
 		
 		var sum = 0;
 		
