@@ -82,14 +82,17 @@ class Individual {
 	// Mutate a value with a chance of mutationRate.
 	// If the value is not mutated, the value is returned unchanged.
 	mutate(value, mutationRate) {
-		console.log("Trying to mutate: " + value);
+		console.log("--Trying to mutate: " + value);
 		var result = value;
 		if (Math.random() < mutationRate) {
 			result = value + Math.random() * 0.1 * 2 - 0.1;
 			// Clamp result between 0 and 1.
 			result = Math.min(Math.max(result, 0), 1);
 		}
-		console.log("Result: " + result);
+		if (result != value) {
+			console.log("MUTATED!!!!!!!!!!!!!!!!!!!!!!!!!");
+		}
+		console.log("--Result: " + result);
 		return result;
 	}
 	
