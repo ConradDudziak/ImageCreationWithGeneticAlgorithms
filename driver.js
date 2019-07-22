@@ -1,99 +1,81 @@
 var outputCanvas;
 var outputContext;
 
-var referenceImage;
-var referenceCanvas;
-var referenceContext;
+var inputImage;
+var inputCanvas;
+var inputContext;
+var inputImageRes;
 
-var workingCanvas;
-var workingContext;
-var workingSize;
-var workingData;
+var dataCanvas;
+var dataContext;
 
-var imageRes;
+var targetSize;
+var targetData;
 
 var mutationRate;
 var populationSize;
 var polygons;
 var vertices;
-var geneSize;
-var dnaLength;
 
-function runSimulation() {
-	population = new Population(workingSize, workingSize,
-								polygons, vertices, 
-								workingContext, mutationRate, populationSize);
-	function tick() {
-		population.evolve(outputContext, imageRes, imageRes);
+function startGeneticAlgorithm() {
+	population = new Population(targetSize, targetSize,
+								polygons, vertices,
+								targetData, dataContext, 
+								mutationRate, populationSize);
+	function iterate() {
+		population.generate(outputContext, inputImageRes, inputImageRes);
 	}
-	setInterval(tick, 0);
+	setInterval(iterate, 0);
 }
 
-function startSimulation() {
-	runSimulation();
-}
-
-function setImage(src) {
-	referenceImage.onload = prepareImage;
-	referenceImage.src = src;
-}
-
-function prepareImage() {
-	referenceCanvas.width = workingSize;
-	referenceCanvas.height = workingSize;
-	referenceContext.drawImage(referenceImage, 0, 0, imageRes, imageRes, 0, 0, workingSize, workingSize);
+function setupdataCanvas() {
+	inputCanvas.width = targetSize;
+	inputCanvas.height = targetSize;
+	inputContext.drawImage(inputImage, 0, 0, inputImageRes, inputImageRes, 0, 0, targetSize, targetSize);
 	
-	var imageData = referenceContext.getImageData(0, 0, workingSize, workingSize).data;
+	var rescaledImageData = inputContext.getImageData(0, 0, targetSize, targetSize).data;
 	
-	
-	workingData = [];
-	var p = workingSize * workingSize * 4;
-	
-	for (var i = 0; i < p; i++) {
-		workingData[i] = imageData[i];
+	targetData = [];
+	for (var i = 0; i < targetSize * targetSize * 4; i++) {
+		targetData[i] = rescaledImageData[i];
 	}
 	
-	referenceCanvas.width = imageRes;
-	referenceCanvas.height = imageRes;
-	referenceContext.drawImage(referenceImage, 0, 0);
-	//highestFitness = 0;
-	//lowestFitness = 100;
-	
+	inputCanvas.width = inputImageRes;
+	inputCanvas.height = inputImageRes;
+	inputContext.drawImage(inputImage, 0, 0);	
 }
 
 function configuration() {
-	imageRes = 350;
-	workingSize = 75; // Cannot be greater than imageRes
+	inputImageRes = 350;
+	targetSize = 75; // Cannot be greater than inputImageRes
 	
 	populationSize = 50;
 	polygons = 125;
 	vertices = 3;
 	mutationRate = 0.01;
-	geneSize = 1;
-	dnaLength = polygons * geneSize;
 	
-	workingCanvas.width = workingSize;
-	workingCanvas.height = workingSize;
-    workingCanvas.style.width = workingSize;
-    workingCanvas.style.height = workingSize;
+	dataCanvas.width = targetSize;
+	dataCanvas.height = targetSize;
+    dataCanvas.style.width = targetSize;
+    dataCanvas.style.height = targetSize;
 }
 
 function boot() {
 	outputCanvas = document.getElementById("outputCanvas");
 	outputContext = outputCanvas.getContext('2d');
 	
-	referenceImage = document.getElementById("referenceImage");
-	referenceCanvas = document.getElementById("referenceCanvas");
-	referenceContext = referenceCanvas.getContext('2d');
+	inputImage = document.getElementById("inputImage");
+	inputCanvas = document.getElementById("inputCanvas");
+	inputContext = inputCanvas.getContext('2d');
 	
-	workingCanvas = document.getElementById("workingCanvas");
-	workingContext = workingCanvas.getContext('2d');
+	dataCanvas = document.getElementById("dataCanvas");
+	dataContext = dataCanvas.getContext('2d');
 	
 	configuration();
 	
-	prepareImage();
+	setupdataCanvas();
 	
-	startSimulation();
+	startGeneticAlgorithm();
 }
 
 window.onload = this.boot;

@@ -7,29 +7,17 @@
 	<script language="javascript" type="text/javascript" src="Vertex.js"></script>
 </head>
 
-<div id="wrap">
-<div class="container">
-	<div class="headline">
-		<h1 class="headline-title">CSS 497: Genetic Algorithms</h1>
-	</div>
-
-	<div class="row">
+<div>
+	<div><h1>CSS 497: Genetic Algorithms</h1></div>
+	<div>
 		<center>
-			<!-- pictures -->
-			<div id="pictureframe">
-				<canvas id="referenceCanvas" class="picture" width="350" height="350" style="margin-right: 4px;"></canvas>
-				<canvas id="outputCanvas" class="picture" width="350" height="350" style="margin-left: 4px;"></canvas>
-			</div> <!-- /#pictureframe -->
+			<div>
+				<canvas id="inputCanvas" width="350" height="350"></canvas>
+				<canvas id="outputCanvas" width="350" height="350"></canvas>
+			</div>
 		</center>
-	</div> <!-- /.row -->
-</div>
+	</div>
 </div>
 
-<!-- hidden -->
-<img src="images/mona-lisa.jpg"
-	 id="referenceImage"
-	 style="display: none;" />
-
-<canvas id="workingCanvas"
-		width="1" height="1"
-		style="display: none;"></canvas>
+<img src="images/mona-lisa.jpg" id="inputImage" style="display: none;"/>
+<canvas id="targetCanvas" width="1" height="1" style="display: none;"></canvas>

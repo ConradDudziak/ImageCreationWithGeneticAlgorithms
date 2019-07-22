@@ -1,5 +1,5 @@
-class Illustration {
-	// Construct a random Image
+class Picture {
+	// Construct a random Picture
 	constructor(polygonCount, vertexCount) {
 		this.polygons = [];
 		
@@ -8,18 +8,23 @@ class Illustration {
 		}
 	}
 
+	// Returns the polygon array of this Picture
 	getPolygons() {
 		return this.polygons;
 	}
 
+	// Draws the array of polygons to the given canvasContext with width and height.
 	draw(canvasContext, width, height) {
+		// Set the background color.
 		canvasContext.fillStyle = '#000';
 		canvasContext.fillRect(0, 0, width, height);
 		
+		// Draw each polygon to the canvas.
 		for (var i = 0; i < this.polygons.length; i++) {
 			var vertices = this.polygons[i].getVertices();
 			canvasContext.beginPath();
 			
+			// Loop through the list of vertices of the polygon.
 			for (var j = 0; j < vertices.length; j++) {
 				if (j == 0) {
 					canvasContext.moveTo(vertices[j].getX() * width,
@@ -31,13 +36,14 @@ class Illustration {
 			}
 			canvasContext.closePath();
 			
-			var styleString = 'rgba(' +
-			((this.polygons[i].getRed() * 255) >> 0) + ',' +    // R - int [0,255]
-			((this.polygons[i].getGreen() * 255) >> 0) + ',' +  // G - int [0,255]
-			((this.polygons[i].getBlue() * 255) >> 0) + ',' +   // B - int [0,255]
-			this.polygons[i].getAlpha() + ')'; 					// A - float [0,1]
+			// Fill the color of each polygon.
+			var rgbaString = 'rgba(' +
+			Math.Floor(this.polygons[i].getRed() * 255) + ',' + 
+			Math.Floor(this.polygons[i].getGreen() * 255) + ',' +
+			Math.Floor(this.polygons[i].getBlue() * 255) + ',' + 
+			this.polygons[i].getAlpha() + ')';
 			
-			canvasContext.fillStyle = styleString;
+			canvasContext.fillStyle = rgbaString;
 			canvasContext.fill();
 		}
 	}

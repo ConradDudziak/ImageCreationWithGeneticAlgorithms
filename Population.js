@@ -1,18 +1,34 @@
 class Population {
-	constructor(width, height, polygonCount, vertexCount, workingContext, mutationRate, populationSize) {
+	// Constructs a Population of Individuals.
+	// polygonCount and vertexCount are integer values used to create the polygon
+	// sets held within each Individual.
+	// targetData is an array of image data that represents the input target image.
+	// DataContext is a canvas context used in the drawing of an individuals polygon
+	// set for comparisons to the targetData.
+	// Width and height are integer values used to map Individual polygon sets to the
+	// dataContext.
+	// The mutation rate is a decimal value that determines how frequently an 
+	// Individuals data can mutate.
+	// populationSize is an integer value that determines how many Individuals exist
+	// within the populatoin.
+	constructor(width, height, 
+				polygonCount, vertexCount, 
+				targetData, dataContext, 
+				mutationRate, populationSize) {
 		this.width = width;
 		this.height = height;
-		this.population; // Array to hold the current population
-		this.matingPool = []; // ArrayList which we will use for our "mating pool"
-		this.generations = 0; // Number of generations
-		this.finished = false; // Are we finished evolving?
-		this.workingContext = workingContext; // Target context
-		this.mutationRate = mutationRate; // Mutation rate
+		this.population = [];
+		this.matingPool = [];
+		this.generations = 0;
+		this.finished = false;
+		this.dataContext = dataContext;
+		this.mutationRate = mutationRate;
 		this.perfectScore = 1;
+		this.targetData = targetData;
 
 		this.best = null;
-
-		this.population = [];
+		
+		// Populate the population with random Individuals.
 		for (let i = 0; i < populationSize; i++) {
 			this.population[i] = new Individual(polygonCount, vertexCount);
 		}
@@ -20,28 +36,28 @@ class Population {
 		this.calcFitness();
 	}
 
-	// Fill our fitness array with a value for every member of the population
+	// Calculate the fitness of each individual in the population array.
 	calcFitness() {
 		for (let i = 0; i < this.population.length; i++) {
-			this.population[i].calcFitness(this.workingContext, this.width, this.height);
+			this.population[i].calcFitness(this.targetData, this.dataContext, this.width, this.height);
 		}
 	}
 
-	// Generate a mating pool
+	// Populate the mating pool with individuals for breeding selection.
 	naturalSelection() {
-		// Clear the ArrayList
 		this.matingPool = [];
 
-		let maxFitness = 0;
+		let bestFitness = 0;
 		for (let i = 0; i < this.population.length; i++) {
-			if (this.population[i].fitness > maxFitness) {
-				maxFitness = this.population[i].fitness;
+			if (this.population[i].fitness > bestFitness) {
+				bestFitness = this.population[i].fitness;
 			}
 		}
 
-		// Based on fitness, each member will get added to the mating pool a certain number of times
+		// Based on fitness, each member will get added to the mating pool 
+		// a certain number of times proportional to the largest fitness.
 		for (let i = 0; i < this.population.length; i++) {
-			let fitness = this.rescale(this.population[i].fitness, 0, maxFitness, 0, 1);
+			let fitness = this.rescale(this.population[i].fitness, 0, bestFitness, 0, 1);
 			let n = Math.floor(fitness * 100);
 			for (let j = 0; j < n; j++) { 
 				this.matingPool.push(this.population[i]);
@@ -49,6 +65,8 @@ class Population {
 		}
 	}
 	
+	// Receives a numeric value between the ranges of minA and minB, and returns a 
+	// rescaled value between minB and maxB.
 	rescale(value, minA, maxA, minB, maxB) {
 		var valuesRatio = ((value - minA) / (maxA - minA));
 		var ratioMinB = valuesRatio * minB;
@@ -56,50 +74,62 @@ class Population {
 		return (1 - ratioMinB + ratioMaxB);
 	}
 
-	// Create a new generation
-	generate() {
-		// Refill the population with children from the mating pool
+	// Breed individuals within the mating pool to create a new generation.
+	// The population is then replaced with the new individuals.
+	breed() {
+		// Loop through the populaton.
 		for (let i = 0; i < this.population.length; i++) {
+			// Choose two random parents from the mating pool.
 			let a = Math.floor(Math.random() * this.matingPool.length);
 			let b = Math.floor(Math.random() * this.matingPool.length);
 			let partnerA = this.matingPool[a];
 			let partnerB = this.matingPool[b];
+			// Create a child by breeding the parents and mutating the result.
 			let child = partnerA.crossover(partnerB, this.mutationRate);
+			// Replace an old population member with the child.
 			this.population[i] = child;
 		}
 		this.generations++;
 	}
-
+	
+	// Returns the Individual with the largest fitness score.
 	getBest() {
 		return this.best;
 	}
 
-	// Compute the current "most fit" member of the population
+	// Determine the best fit Individual in the population.
 	evaluate() {
-		let worldrecord = 0.0;
+		let bestFitness = 0.0;
 		let index = 0;
 		for (let i = 0; i < this.population.length; i++) {
-			if (this.population[i].fitness > worldrecord) {
+			if (this.population[i].fitness > bestFitness) {
 				index = i;
-				worldrecord = this.population[i].fitness;
+				bestFitness = this.population[i].fitness;
 			}
 		}
 
 		this.best = this.population[index];
-		if (worldrecord === this.perfectScore) {
+		
+		// Check if the population has produced a individual 
+		// with a perfect fitness score.
+		if (bestFitness === this.perfectScore) {
 			this.finished = true;
 		}
 	}
-
+	
+	// Returns true if the populatoin has produced a individual
+	// with a perfect fitness score.
 	isFinished() {
 		return this.finished;
 	}
-
+	
+	// Returns the numbers of generations that the population has
+	// experienced.
 	getGenerations() {
 		return this.generations;
 	}
 
-	// Compute average fitness for the population
+	// Returns the average fitness of the population.
 	getAverageFitness() {
 		let total = 0;
 		for (let i = 0; i < this.population.length; i++) {
@@ -108,16 +138,17 @@ class Population {
 		return total / (this.population.length);
 	}
 	
-	evolve(outputContext, width, height) {
-		//while (!this.isFinished()) {
-			this.naturalSelection();
-			this.generate();
-			this.calcFitness();
-			this.evaluate();
-			this.displayData(outputContext, width, height);
-		//}
+	// Applies all the steps necessary to produce a single generation
+	// in the population.
+	generate(outputContext, width, height) {
+		this.naturalSelection();
+		this.breed();
+		this.calcFitness();
+		this.evaluate();
+		this.displayData(outputContext, width, height);
 	}
 	
+	// Outputs the current best individual of the population to the outputCanvas.
 	displayData(outputContext, width, height) {
 		var best = this.getBest();
 		if (best == null) {
