@@ -56,19 +56,19 @@ class Individual {
 			
 			// Set the color values of the child polygon to be the mutated values of
 			// the parents polygon.
-			currentChildPolygon.setRed(this.mutate(currentParentPolygon.getRed()), mutationRate);
-			currentChildPolygon.setGreen(this.mutate(currentParentPolygon.getGreen()), mutationRate);
-			currentChildPolygon.setBlue(this.mutate(currentParentPolygon.getBlue()), mutationRate);
-			currentChildPolygon.setAlpha(this.mutate(currentParentPolygon.getAlpha()), mutationRate);
+			currentChildPolygon.setRed(this.mutate(currentParentPolygon.getRed(), mutationRate));
+			currentChildPolygon.setGreen(this.mutate(currentParentPolygon.getGreen(), mutationRate));
+			currentChildPolygon.setBlue(this.mutate(currentParentPolygon.getBlue(), mutationRate));
+			currentChildPolygon.setAlpha(this.mutate(currentParentPolygon.getAlpha(), mutationRate));
 			
 			// Set the vertex values of the child polygon to be the mutated values of
 			// the parents polygon.
 			for (var j = 0; j < parentVertices.length; j++) {
-				childVertices[j].setX(this.mutate(parentVertices[j].getX()), mutationRate);
-				childVertices[j].setY(this.mutate(parentVertices[j].getY()), mutationRate);
+				childVertices[j].setX(this.mutate(parentVertices[j].getX(), mutationRate));
+				childVertices[j].setY(this.mutate(parentVertices[j].getY(), mutationRate));
 			}
+			console.log(i);
 		}
-		console.log(child);
 		return child;
 	}
 	
