@@ -156,6 +156,5 @@ class Population {
 		} else {
 			this.getBest().draw(outputContext, width, height);
 		}
-		console.log(best.fitness);
 	}
 }
