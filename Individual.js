@@ -56,16 +56,16 @@ class Individual {
 			
 			// Set the color values of the child polygon to be the mutated values of
 			// the parents polygon.
-			currentChildPolygon.setRed(this.mutate(currentParentPolygon.getRed()));
-			currentChildPolygon.setGreen(this.mutate(currentParentPolygon.getGreen()));
-			currentChildPolygon.setBlue(this.mutate(currentParentPolygon.getBlue()));
-			currentChildPolygon.setAlpha(this.mutate(currentParentPolygon.getAlpha()));
+			currentChildPolygon.setRed(this.mutate(currentParentPolygon.getRed()), mutationRate);
+			currentChildPolygon.setGreen(this.mutate(currentParentPolygon.getGreen()), mutationRate);
+			currentChildPolygon.setBlue(this.mutate(currentParentPolygon.getBlue()), mutationRate);
+			currentChildPolygon.setAlpha(this.mutate(currentParentPolygon.getAlpha()), mutationRate);
 			
 			// Set the vertex values of the child polygon to be the mutated values of
 			// the parents polygon.
 			for (var j = 0; j < parentVertices.length; j++) {
-				childVertices[j].setX(this.mutate(parentVertices[j].getX()));
-				childVertices[j].setY(this.mutate(parentVertices[j].getY()));
+				childVertices[j].setX(this.mutate(parentVertices[j].getX()), mutationRate);
+				childVertices[j].setY(this.mutate(parentVertices[j].getY()), mutationRate);
 			}
 		}
 		console.log(child);
@@ -76,7 +76,6 @@ class Individual {
 	// If the value is not mutated, the value is returned unchanged.
 	mutate(value, mutationRate) {
 		console.log("--The mutation rate is: " + mutationRate);
-		console.log("--Trying to mutate: " + value);
 		var result = value;
 		if (Math.random() < mutationRate) {
 			result = value + Math.random() * 0.1 * 2 - 0.1;
@@ -86,7 +85,6 @@ class Individual {
 		if (result != value) {
 			console.log("MUTATED!!!!!!!!!!!!!!!!!!!!!!!!!");
 		}
-		console.log("--Result: " + result);
 		return result;
 	}
 	
