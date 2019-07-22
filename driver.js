@@ -22,10 +22,10 @@ function startGeneticAlgorithm() {
 								polygons, vertices,
 								targetData, dataContext, 
 								mutationRate, populationSize);
-	function iterate() {
+	//function iterate() {
 		population.generate(outputContext, inputImageRes, inputImageRes);
-	}
-	setInterval(iterate, 0);
+	//}
+	//setInterval(iterate, 0);
 }
 
 function setupdataCanvas() {
