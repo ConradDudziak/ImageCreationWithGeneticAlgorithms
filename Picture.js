@@ -38,9 +38,9 @@ class Picture {
 			
 			// Fill the color of each polygon.
 			var rgbaString = 'rgba(' +
-			Math.Floor(this.polygons[i].getRed() * 255) + ',' + 
-			Math.Floor(this.polygons[i].getGreen() * 255) + ',' +
-			Math.Floor(this.polygons[i].getBlue() * 255) + ',' + 
+			Math.floor(this.polygons[i].getRed() * 255) + ',' + 
+			Math.floor(this.polygons[i].getGreen() * 255) + ',' +
+			Math.floor(this.polygons[i].getBlue() * 255) + ',' + 
 			this.polygons[i].getAlpha() + ')';
 			
 			canvasContext.fillStyle = rgbaString;
