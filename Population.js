@@ -63,9 +63,9 @@ class Population {
 		// a certain number of times proportional to the largest fitness.
 		for (let i = 0; i < this.population.length; i++) {
 			let fitness = this.rescale(this.population[i].fitness, worstFitness, bestFitness, 0, 1);
-			console.log("--My rescaled fitness: " + fitness);
+			//console.log("--My rescaled fitness: " + fitness);
 			let n = Math.floor(fitness * fitness * 100);
-			console.log("--Add me " + n + " times");
+			//console.log("--Add me " + n + " times");
 			for (let j = 0; j < n; j++) { 
 				this.matingPool.push(this.population[i]);
 			}
