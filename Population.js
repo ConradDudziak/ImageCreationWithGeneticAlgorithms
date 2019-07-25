@@ -67,7 +67,7 @@ class Population {
 	
 	// Receives a numeric value between the ranges of minA and minB, and returns a 
 	// rescaled value between minB and maxB.
-	function rescale(value, minA, maxA, minB, maxB) {
+	rescale(value, minA, maxA, minB, maxB) {
 		return ((value - minA) / (maxA - minA)) * (maxB - minB) + minB;
 	}
 
