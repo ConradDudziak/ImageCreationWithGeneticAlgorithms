@@ -12,7 +12,7 @@ class Individual {
 		return this.genes;
 	}
 
-	// Fitness function (Larger fitness is LESS fit).
+	// Fitness function (Larger fitness is more fit).
 	calcFitness(targetData, dataContext, width, height) {
 		// Draw this individuals genes to the dataContext
 		this.draw(dataContext, width, height);
@@ -35,9 +35,10 @@ class Individual {
 		
 		// 1 is perfect fitness.
 		// 0 is worst fitnes?
-		
+		/*
 		console.log("-- My Sum: " + sum);
 		console.log("-- My Fitness: " + this.fitness);
+		*/
 	}
 
 	// Breed this individual with the partner individual, and return a child individual.
@@ -74,10 +75,12 @@ class Individual {
 				childVertices[j].setY(this.mutate(parentVertices[j].getY(), mutationRate));
 			}
 		}
+		/*
 		console.log("***Breeding***");
 		console.log("-- Me: " + this.genes.polygons);
 		console.log("-- Partner: " + partner.genes.polygons);
 		console.log("-- Child: " + child.genes.polygons);
+		*/
 		return child;
 	}
 	
