@@ -63,7 +63,7 @@ class Population {
 				this.matingPool.push(this.population[i]);
 			}
 		}
-		console.log("MatingPool: " + matingPool);
+		console.log("MatingPool: " + this.matingPool);
 	}
 	
 	// Receives a numeric value between the ranges of minA and minB, and returns a 
