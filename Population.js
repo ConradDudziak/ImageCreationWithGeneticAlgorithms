@@ -48,16 +48,21 @@ class Population {
 		this.matingPool = [];
 
 		let bestFitness = 0;
+		let worstFitness = 1;
 		for (let i = 0; i < this.population.length; i++) {
 			if (this.population[i].fitness > bestFitness) {
 				bestFitness = this.population[i].fitness;
+			}
+			
+			if (this.population[i].fitness < worstFitness) {
+				worstFitness = this.population[i].fitness;
 			}
 		}
 
 		// Based on fitness, each member will get added to the mating pool 
 		// a certain number of times proportional to the largest fitness.
 		for (let i = 0; i < this.population.length; i++) {
-			let fitness = this.rescale(this.population[i].fitness, 0, bestFitness, 0, 1);
+			let fitness = this.rescale(this.population[i].fitness, worstFitness, bestFitness, 0, 1);
 			console.log("--My rescaled fitness: " + fitness);
 			let n = Math.floor(fitness * 100);
 			console.log("--Add me " + n + " times");
