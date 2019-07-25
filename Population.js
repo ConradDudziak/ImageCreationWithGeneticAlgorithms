@@ -67,11 +67,8 @@ class Population {
 	
 	// Receives a numeric value between the ranges of minA and minB, and returns a 
 	// rescaled value between minB and maxB.
-	rescale(value, minA, maxA, minB, maxB) {
-		var valuesRatio = ((value - minA) / (maxA - minA));
-		var ratioMinB = valuesRatio * minB;
-		var ratioMaxB = valuesRatio * maxB;
-		return (1 - ratioMinB + ratioMaxB);
+	function rescale(value, minA, maxA, minB, maxB) {
+		return ((value - minA) / (maxA - minA)) * (maxB - minB) + minB;
 	}
 
 	// Breed individuals within the mating pool to create a new generation.
