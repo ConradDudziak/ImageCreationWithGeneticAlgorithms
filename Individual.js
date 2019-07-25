@@ -32,6 +32,9 @@ class Individual {
 		// Calculate the fitness of this individual by calculating the largest
 		// possible difference and subtracting the ratio from 1.
 		this.fitness = 1 - (sum / (width * height * 4 * 255 * 255));
+		
+		console.log("-- My Sum: " + sum);
+		console.log("-- My Fitness: " + this.fitness);
 	}
 
 	// Breed this individual with the partner individual, and return a child individual.
@@ -68,6 +71,10 @@ class Individual {
 				childVertices[j].setY(this.mutate(parentVertices[j].getY(), mutationRate));
 			}
 		}
+		console.log("***Breeding***");
+		console.log("-- Me: " + this);
+		console.log("-- Partner: " + partner);
+		console.log("-- Child: " + child);
 		return child;
 	}
 	

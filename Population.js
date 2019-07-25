@@ -63,6 +63,7 @@ class Population {
 				this.matingPool.push(this.population[i]);
 			}
 		}
+		console.log("MatingPool: " + matingPool);
 	}
 	
 	// Receives a numeric value between the ranges of minA and minB, and returns a 
@@ -151,6 +152,7 @@ class Population {
 		if (best == null) {
 			console.log("Best was not set. Cannot evolve.")
 		} else {
+			console.log("Best Fit: " + this.getBest());
 			this.getBest().draw(outputContext, width, height);
 		}
 	}
