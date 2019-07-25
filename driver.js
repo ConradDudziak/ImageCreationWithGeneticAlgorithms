@@ -51,10 +51,10 @@ function setupDataCanvas() {
 // Initializes all GA parameters.
 function configuration() {
 	inputImageRes = 350;
-	dataSize = 75; // Cannot be greater than inputImageRes
+	dataSize = 150; // Cannot be greater than inputImageRes
 	
 	populationSize = 50;
-	polygons = 125;
+	polygons = 250;
 	vertices = 3;
 	mutationRate = 0.01;
 	
