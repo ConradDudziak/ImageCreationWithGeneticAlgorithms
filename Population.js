@@ -158,7 +158,6 @@ class Population {
 		if (best == null) {
 			console.log("Best was not set. Cannot evolve.")
 		} else {
-			console.log("Best Fit: " + this.getBest().fitness);
 			this.getBest().draw(outputContext, width, height);
 		}
 	}
