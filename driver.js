@@ -86,7 +86,7 @@ function inputFile(){
 	
 	reader.onload = function () {
 		inputImage.src = reader.result;
-		console.log(inputImage);
+		console.log(inputImage.style.height);
 		inputImageResWidth = inputImage.width;
 		console.log("My width" + inputImageResWidth);
 		inputImageResHeight = inputImage.height;
