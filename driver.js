@@ -1,3 +1,6 @@
+var initilizationComplete;
+var stopClicked;
+
 var outputCanvas;
 var outputContext;
 
@@ -28,7 +31,12 @@ function startGeneticAlgorithm() {
 	function iterate() {
 		population.generate(outputContext, inputImageRes, inputImageRes);
 	}
-	setInterval(iterate, 0);
+	
+	if (!stopClicked) {
+		setInterval(iterate, 0);
+	} else {
+		stopClicked = false;
+	}
 }
 
 // Sets the targetData by scaling the inputImage to the dataCanvas.
@@ -49,6 +57,14 @@ function setupDataCanvas() {
 	inputContext.drawImage(inputImage, 0, 0);	
 }
 
+function startClick() {
+	startGeneticAlgorithm();
+}
+
+function stopClick() {
+	stopClicked = true;
+}
+
 function inputFile(){
 	var preview = document.querySelector('img'); //selects the query named img
 	var file = document.querySelector('input[type=file]').files[0]; //sames as here
@@ -64,8 +80,6 @@ function inputFile(){
 		preview.src = "";
 	}
 }
-
-// TODO: inputFile();  //calls the function named previewFile()
 
 // Initializes all GA parameters.
 function configuration() {
@@ -102,7 +116,9 @@ function boot() {
 	
 	setupDataCanvas();
 	
-	startGeneticAlgorithm();
+	//initilizationComplete = true;
+	
+	//startGeneticAlgorithm();
 }
 
 window.onload = this.boot;
