@@ -75,7 +75,7 @@ function inputFile(){
 	var file = fileInput.files[0]; //sames as here
 	var reader = new FileReader();
 	
-	reader.onloadend = function () {
+	reader.onload = function () {
 		inputImage.src = reader.result;
 		console.log("Changing");
 		// Scale or reconfigure??
