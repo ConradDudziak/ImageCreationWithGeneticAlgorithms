@@ -132,7 +132,7 @@ function boot() {
 	
 	configuration();
 	
-	setupDataCanvas();
+	//setupDataCanvas();
 }
 
 window.onload = this.boot;
