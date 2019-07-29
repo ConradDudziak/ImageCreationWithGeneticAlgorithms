@@ -1,5 +1,4 @@
-var initilizationComplete;
-var stopClicked;
+var running;
 var currentInterval;
 
 var outputCanvas;
@@ -55,12 +54,15 @@ function setupDataCanvas() {
 }
 
 function startClick() {
-	startGeneticAlgorithm();
+	if (!running) {
+		running = true;
+		startGeneticAlgorithm();	
+	}
 }
 
 function stopClick() {
 	clearInterval(currentInterval);
-	stopClicked = true;
+	running = false;
 }
 
 function inputFile(){
@@ -94,7 +96,7 @@ function configuration() {
     dataCanvas.style.width = dataSize;
     dataCanvas.style.height = dataSize;
 	
-	stopClicked = false;
+	running = false;
 }
 
 // Initilizes all html canvas elements, configures data parameters,
@@ -115,10 +117,6 @@ function boot() {
 	configuration();
 	
 	setupDataCanvas();
-	
-	//initilizationComplete = true;
-	
-	//startGeneticAlgorithm();
 }
 
 window.onload = this.boot;
