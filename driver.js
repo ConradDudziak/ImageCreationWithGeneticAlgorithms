@@ -1,5 +1,6 @@
 var initilizationComplete;
 var stopClicked;
+var currentInterval;
 
 var outputCanvas;
 var outputContext;
@@ -32,7 +33,7 @@ function startGeneticAlgorithm() {
 		population.generate(outputContext, inputImageRes, inputImageRes);
 	}
 	
-	setInterval(iterate, 0);
+	currentInterval = setInterval(iterate, 0);
 }
 
 // Sets the targetData by scaling the inputImage to the dataCanvas.
@@ -58,7 +59,7 @@ function startClick() {
 }
 
 function stopClick() {
-	clearInterval();
+	clearInterval(currentInterval);
 	stopClicked = true;
 }
 
