@@ -107,8 +107,8 @@ function configuration() {
 	vertices = 3;
 	mutationRate = 0.01;
 	
-	dataCanvas.width = dataSize;
-	dataCanvas.height = dataSize;
+	dataCanvas.width = dataSizeWidth;
+	dataCanvas.height = dataSizeHeight;
     dataCanvas.style.width = dataSize;
     dataCanvas.style.height = dataSize;
 	
