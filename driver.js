@@ -35,6 +35,7 @@ function startGeneticAlgorithm() {
 	if (!stopClicked) {
 		setInterval(iterate, 0);
 	} else {
+		console.log("stop execution");
 		stopClicked = false;
 	}
 }
@@ -95,6 +96,8 @@ function configuration() {
 	dataCanvas.height = dataSize;
     dataCanvas.style.width = dataSize;
     dataCanvas.style.height = dataSize;
+	
+	stopClicked = false;
 }
 
 // Initilizes all html canvas elements, configures data parameters,
