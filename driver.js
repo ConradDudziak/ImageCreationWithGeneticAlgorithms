@@ -1,6 +1,12 @@
 var running;
 var currentInterval;
 
+var popSizeInput;
+var polygonCountInput;
+var vertexCountInput;
+var mutationRateInput;
+var resolutionScaleFactorInput;
+
 var outputCanvas;
 var outputContext;
 
@@ -74,10 +80,10 @@ function stopClick() {
 	running = false;
 }
 
+// Sets the input image to be the image passed into the inputFile element.
+// Re-initilizes the data canvas with the new target data.
 function inputFile(){
-	//var preview = document.querySelector('img'); //selects the query named img
-	//inputImage
-	var file = fileInput.files[0]; //sames as here
+	var file = fileInput.files[0];
 	var reader = new FileReader();
 	
 	reader.onload = function () {
@@ -107,14 +113,27 @@ function inputFile(){
 function configuration() {
 	inputImageResWidth = 350;
 	inputImageResHeight = 350;
-	dataSizeWidth = 75; // Cannot be greater than inputImageRes
-	dataSizeHeight = 75; // Cannot be greater than inputImageRes
+	dataSizeWidth = 75; // Cannot be greater than inputImageResWidth
+	dataSizeHeight = 75; // Cannot be greater than inputImageResHeight
 	
+	/*
 	populationSize = 50;
 	polygons = 125;
 	vertices = 3;
 	mutationRate = 0.01;
 	dataSizeScaleFactor = 4.5;
+	*/
+	
+	populationSize = popSizeInput.value;
+	console.log(populationSize);
+	polygons = polygonCountInput.value;
+	console.log(polygons);
+	vertices = vertexCountInput.value;
+	console.log(vertices);
+	mutationRate = mutationRateInput.value;
+	console.log(mutationRate);
+	dataSizeScaleFactor = resolutionScaleFactorInput.value;
+	console.log(dataSizeScaleFactor);
 	
 	dataCanvas.width = dataSizeWidth;
 	dataCanvas.height = dataSizeHeight;
@@ -138,6 +157,12 @@ function boot() {
 	
 	dataCanvas = document.getElementById("dataCanvas");
 	dataContext = dataCanvas.getContext('2d');
+	
+	popSizeInput = document.getElementById("populationSize");
+	polygonCountInput = document.getElementById("polygonCount");
+	vertexCountInput = document.getElementById("vertexCount");
+	mutationRateInput = document.getElementById("mutationRate");
+	resolutionScaleFactorInput = document.getElementById("resolutionScaleFactor");
 	
 	configuration();
 	
