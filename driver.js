@@ -89,18 +89,16 @@ function inputFile(){
 		tempImage.src = reader.result;
 		
 		tempImage.onload = function() {
-			console.log("temp height: " + this.height);
+			inputImage.width = this.width;
+			inputImage.height = this.height;
+			inputImage.src = tempImage.src;
+			inputImageResWidth = inputImage.width;
+			inputImageResHeight = inputImage.height;
+			dataSizeWidth = 75;
+			dataSizeHeight = 75;
+			// Scale or reconfigure??
+			setupDataCanvas();
 		};
-		
-		inputImage.src = reader.result;
-		console.log(inputImage.style.height);
-		inputImageResWidth = inputImage.width;
-		console.log("My width" + inputImageResWidth);
-		inputImageResHeight = inputImage.height;
-		dataSizeWidth = 75;
-		dataSizeHeight = 75;
-		// Scale or reconfigure??
-		setupDataCanvas();
 	}
 
 	if (file) {
