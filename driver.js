@@ -79,7 +79,7 @@ function inputFile(){
 		inputImage.src = reader.result;
 		console.log("Changing");
 		// Scale or reconfigure??
-		setupDataCanvas();
+		// setupDataCanvas();
 	}
 
 	if (file) {
