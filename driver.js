@@ -85,6 +85,13 @@ function inputFile(){
 	var reader = new FileReader();
 	
 	reader.onload = function () {
+		var tempImage = new Image();
+		tempImage.src = reader.result;
+		
+		tempImage.onload = function() {
+			console.log("temp height: " + this.height);
+		};
+		
 		inputImage.src = reader.result;
 		console.log(inputImage.style.height);
 		inputImageResWidth = inputImage.width;
