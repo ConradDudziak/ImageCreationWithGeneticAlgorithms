@@ -25,6 +25,11 @@
 
 <div>
 	<input type="file" id="fileInput" onchange="inputFile()" accept="image/*">
+	<input type="number" name="populationSize" min="50" max="150">
+	<input type="number" name="polygonCount" min="100" max="250">
+	<input type="number" name="vertexCount" min="3" max="12">
+	<input type="number" name="mutationRate" min="0.01" max="0.15">
+	<input type="number" name="computationScaleFactor" min="1" max="4.5">
 </div>
 
 <img src="images/gogh.jpg" id="inputImage" style="display: none;"/>

@@ -15,6 +15,7 @@ var dataCanvas;
 var dataContext;
 var dataSizeWidth;
 var dataSizeHeight;
+var dataSizeScaleFactor;
 
 var targetData;
 
@@ -89,9 +90,8 @@ function inputFile(){
 			inputImage.src = tempImage.src;
 			inputImageResWidth = inputImage.width;
 			inputImageResHeight = inputImage.height;
-			dataSizeWidth = Math.floor(inputImageResWidth / 4.5); // TODO: math for scales
-			dataSizeHeight = Math.floor(inputImageResHeight / 4.5); // TODO: math for scales
-			// Scale or reconfigure??
+			dataSizeWidth = Math.floor(inputImageResWidth / dataSizeScaleFactor);
+			dataSizeHeight = Math.floor(inputImageResHeight / dataSizeScaleFactor);
 			setupDataCanvas();
 		};
 	}
@@ -114,6 +114,7 @@ function configuration() {
 	polygons = 125;
 	vertices = 3;
 	mutationRate = 0.01;
+	dataSizeScaleFactor = 4.5;
 	
 	dataCanvas.width = dataSizeWidth;
 	dataCanvas.height = dataSizeHeight;
