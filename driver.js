@@ -77,6 +77,7 @@ function inputFile(){
 	
 	reader.onloadend = function () {
 		inputImage.src = reader.result;
+		console.log(inputImage.src);
 	}
 
 	if (file) {
