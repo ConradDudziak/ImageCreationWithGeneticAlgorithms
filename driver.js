@@ -69,6 +69,13 @@ function setupDataCanvas() {
 function startClick() {
 	if (!running) {
 		running = true;
+		
+		populationSize = popSizeInput.value;
+		polygons = polygonCountInput.value;
+		vertices = vertexCountInput.value;
+		mutationRate = mutationRateInput.value;
+		dataSizeScaleFactor = resolutionScaleFactorInput.value;
+		
 		startGeneticAlgorithm();	
 	}
 }
@@ -98,6 +105,7 @@ function inputFile(){
 			inputImageResHeight = inputImage.height;
 			dataSizeWidth = Math.floor(inputImageResWidth / dataSizeScaleFactor);
 			dataSizeHeight = Math.floor(inputImageResHeight / dataSizeScaleFactor);
+			
 			setupDataCanvas();
 		};
 	}
@@ -125,15 +133,10 @@ function configuration() {
 	*/
 	
 	populationSize = popSizeInput.value;
-	console.log(populationSize);
 	polygons = polygonCountInput.value;
-	console.log(polygons);
 	vertices = vertexCountInput.value;
-	console.log(vertices);
 	mutationRate = mutationRateInput.value;
-	console.log(mutationRate);
 	dataSizeScaleFactor = resolutionScaleFactorInput.value;
-	console.log(dataSizeScaleFactor);
 	
 	dataCanvas.width = dataSizeWidth;
 	dataCanvas.height = dataSizeHeight;
