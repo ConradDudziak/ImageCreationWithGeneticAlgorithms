@@ -41,9 +41,9 @@ function startGeneticAlgorithm() {
 function setupDataCanvas() {
 	console.log("Trying to setup dataCanvas");
 	inputCanvas.width = dataSizeWidth;
-	console.log("Width" + inputCanvas.width);
+	console.log("Width " + inputCanvas.width);
 	inputCanvas.height = dataSizeHeight;
-	console.log("Height" + inputCanvas.height);
+	console.log("Height " + inputCanvas.height);
 	inputContext.drawImage(inputImage, 0, 0, inputImageResWidth, inputImageResHeight, 0, 0, dataSizeWidth, dataSizeHeight);
 	
 	var rescaledImageData = inputContext.getImageData(0, 0, dataSizeWidth, dataSizeHeight).data;
@@ -86,7 +86,9 @@ function inputFile(){
 	
 	reader.onload = function () {
 		inputImage.src = reader.result;
+		console.log(inputImage);
 		inputImageResWidth = inputImage.width;
+		console.log("My width" + inputImageResWidth);
 		inputImageResHeight = inputImage.height;
 		dataSizeWidth = 75;
 		dataSizeHeight = 75;
