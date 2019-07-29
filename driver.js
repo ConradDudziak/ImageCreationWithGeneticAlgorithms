@@ -8,7 +8,8 @@ var fileInput;
 var inputImage;
 var inputCanvas;
 var inputContext;
-var inputImageRes;
+var inputImageResWidth;
+var inputImageResHeight;
 
 var dataCanvas;
 var dataContext;
@@ -29,7 +30,7 @@ function startGeneticAlgorithm() {
 								targetData, dataContext, 
 								mutationRate, populationSize);
 	function iterate() {
-		population.generate(outputContext, inputImageRes, inputImageRes);
+		population.generate(outputContext, inputImageResWidth, inputImageResHeight);
 	}
 	
 	currentInterval = setInterval(iterate, 0);
@@ -39,7 +40,7 @@ function startGeneticAlgorithm() {
 function setupDataCanvas() {
 	inputCanvas.width = dataSize;
 	inputCanvas.height = dataSize;
-	inputContext.drawImage(inputImage, 0, 0, inputImageRes, inputImageRes, 0, 0, dataSize, dataSize);
+	inputContext.drawImage(inputImage, 0, 0, inputImageResWidth, inputImageResHeight, 0, 0, dataSize, dataSize);
 	
 	var rescaledImageData = inputContext.getImageData(0, 0, dataSize, dataSize).data;
 	
@@ -48,8 +49,8 @@ function setupDataCanvas() {
 		targetData[i] = rescaledImageData[i];
 	}
 	
-	inputCanvas.width = inputImageRes;
-	inputCanvas.height = inputImageRes;
+	inputCanvas.width = inputImageResWidth;
+	inputCanvas.height = inputImageResHeight;
 	inputContext.drawImage(inputImage, 0, 0);	
 }
 
@@ -77,10 +78,10 @@ function inputFile(){
 	
 	reader.onload = function () {
 		inputImage.src = reader.result;
-		console.log(reader);
-		console.log("Changing");
+		inputImageResWidth = inputImage.width;
+		inputImageResHeight = inputImage.height;
 		// Scale or reconfigure??
-		// setupDataCanvas();
+		setupDataCanvas();
 	}
 
 	if (file) {
@@ -92,7 +93,8 @@ function inputFile(){
 
 // Initializes all GA parameters.
 function configuration() {
-	inputImageRes = 350;
+	inputImageResWidth = 350;
+	inputImageResHeight = 350;
 	dataSize = 75; // Cannot be greater than inputImageRes
 	
 	populationSize = 50;
