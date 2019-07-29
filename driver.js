@@ -1,6 +1,7 @@
 var outputCanvas;
 var outputContext;
 
+var fileInput;
 var inputImage;
 var inputCanvas;
 var inputContext;
@@ -48,6 +49,24 @@ function setupDataCanvas() {
 	inputContext.drawImage(inputImage, 0, 0);	
 }
 
+function inputFile(){
+	var preview = document.querySelector('img'); //selects the query named img
+	var file = document.querySelector('input[type=file]').files[0]; //sames as here
+	var reader = new FileReader();
+	
+	reader.onloadend = function () {
+		preview.src = reader.result;
+	}
+
+	if (file) {
+		reader.readAsDataURL(file); //reads the data as a URL
+	} else {
+		preview.src = "";
+	}
+}
+
+// TODO: inputFile();  //calls the function named previewFile()
+
 // Initializes all GA parameters.
 function configuration() {
 	inputImageRes = 350;
@@ -67,6 +86,8 @@ function configuration() {
 // Initilizes all html canvas elements, configures data parameters,
 // and then starts the genetic algorithm.
 function boot() {
+	fileInput = document.getElementById("fileInput");
+	
 	outputCanvas = document.getElementById("outputCanvas");
 	outputContext = outputCanvas.getContext('2d');
 	
