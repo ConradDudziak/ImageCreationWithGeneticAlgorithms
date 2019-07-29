@@ -32,12 +32,7 @@ function startGeneticAlgorithm() {
 		population.generate(outputContext, inputImageRes, inputImageRes);
 	}
 	
-	if (!stopClicked) {
-		setInterval(iterate, 0);
-	} else {
-		console.log("stop execution");
-		stopClicked = false;
-	}
+	setInterval(iterate, 0);
 }
 
 // Sets the targetData by scaling the inputImage to the dataCanvas.
@@ -63,6 +58,7 @@ function startClick() {
 }
 
 function stopClick() {
+	clearInterval();
 	stopClicked = true;
 }
 
