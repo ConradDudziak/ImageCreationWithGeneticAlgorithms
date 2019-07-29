@@ -82,7 +82,7 @@ function inputFile(){
 	if (file) {
 		reader.readAsDataURL(file); //reads the data as a URL
 	} else {
-		inputImage.src = "images/gogh.jpg";
+		inputImage.src = "";
 	}
 	
 	// Scale or reconfigure??
