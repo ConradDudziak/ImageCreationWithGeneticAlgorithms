@@ -109,8 +109,8 @@ function configuration() {
 	
 	dataCanvas.width = dataSizeWidth;
 	dataCanvas.height = dataSizeHeight;
-    dataCanvas.style.width = dataSize;
-    dataCanvas.style.height = dataSize;
+    dataCanvas.style.width = dataSizeWidth;
+    dataCanvas.style.height = dataSizeHeight;
 	
 	running = false;
 }
