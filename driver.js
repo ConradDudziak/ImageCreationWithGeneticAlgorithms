@@ -77,7 +77,9 @@ function inputFile(){
 	
 	reader.onloadend = function () {
 		inputImage.src = reader.result;
-		console.log(inputImage.src);
+		console.log("Changing");
+		// Scale or reconfigure??
+		setupDataCanvas();
 	}
 
 	if (file) {
@@ -85,9 +87,6 @@ function inputFile(){
 	} else {
 		inputImage.src = "";
 	}
-	
-	// Scale or reconfigure??
-	setupDataCanvas();
 }
 
 // Initializes all GA parameters.
