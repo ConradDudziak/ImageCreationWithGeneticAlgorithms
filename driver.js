@@ -53,6 +53,8 @@ function setupDataCanvas() {
 	inputContext.drawImage(inputImage, 0, 0);	
 }
 
+// Called through HTML GUI button interaction with the start button.
+// Begins the genetic algorithm with a new population set.
 function startClick() {
 	if (!running) {
 		running = true;
@@ -60,25 +62,31 @@ function startClick() {
 	}
 }
 
+// Called through HTML GUI button interaction with the start button.
+// Ends the current genetic algorithm's population set.
 function stopClick() {
 	clearInterval(currentInterval);
 	running = false;
 }
 
 function inputFile(){
-	var preview = document.querySelector('img'); //selects the query named img
-	var file = document.querySelector('input[type=file]').files[0]; //sames as here
+	//var preview = document.querySelector('img'); //selects the query named img
+	//inputImage
+	var file = fileInput.files[0]; //sames as here
 	var reader = new FileReader();
 	
 	reader.onloadend = function () {
-		preview.src = reader.result;
+		inputImage.src = reader.result;
 	}
 
 	if (file) {
 		reader.readAsDataURL(file); //reads the data as a URL
 	} else {
-		preview.src = "";
+		inputImage.src = "images/gogh.jpg";
 	}
+	
+	// Scale or reconfigure??
+	setupDataCanvas();
 }
 
 // Initializes all GA parameters.
