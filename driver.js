@@ -85,7 +85,7 @@ function inputFile(){
 		dataSizeWidth = 75;
 		dataSizeHeight = 75;
 		// Scale or reconfigure??
-		setupDataCanvas();
+		// setupDataCanvas();
 	}
 
 	if (file) {
