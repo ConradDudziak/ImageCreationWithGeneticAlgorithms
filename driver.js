@@ -13,7 +13,8 @@ var inputImageResHeight;
 
 var dataCanvas;
 var dataContext;
-var dataSize;
+var dataSizeWidth;
+var dataSizeHeight;
 
 var targetData;
 
@@ -25,7 +26,7 @@ var vertices;
 // Create an instance of the population and iterate
 // over its generations.
 function startGeneticAlgorithm() {
-	population = new Population(dataSize, dataSize,
+	population = new Population(dataSizeWidth, dataSizeHeight,
 								polygons, vertices,
 								targetData, dataContext, 
 								mutationRate, populationSize);
@@ -38,14 +39,15 @@ function startGeneticAlgorithm() {
 
 // Sets the targetData by scaling the inputImage to the dataCanvas.
 function setupDataCanvas() {
-	inputCanvas.width = dataSize;
-	inputCanvas.height = dataSize;
-	inputContext.drawImage(inputImage, 0, 0, inputImageResWidth, inputImageResHeight, 0, 0, dataSize, dataSize);
+	console.log("Trying to setup dataCanvas");
+	inputCanvas.width = dataSizeWidth;
+	inputCanvas.height = dataSizeHeight;
+	inputContext.drawImage(inputImage, 0, 0, inputImageResWidth, inputImageResHeight, 0, 0, dataSizeWidth, dataSizeHeight);
 	
-	var rescaledImageData = inputContext.getImageData(0, 0, dataSize, dataSize).data;
+	var rescaledImageData = inputContext.getImageData(0, 0, dataSizeWidth, dataSizeHeight).data;
 	
 	targetData = [];
-	for (var i = 0; i < dataSize * dataSize * 4; i++) {
+	for (var i = 0; i < dataSizeWidth * dataSizeHeight * 4; i++) {
 		targetData[i] = rescaledImageData[i];
 	}
 	
@@ -80,6 +82,8 @@ function inputFile(){
 		inputImage.src = reader.result;
 		inputImageResWidth = inputImage.width;
 		inputImageResHeight = inputImage.height;
+		dataSizeWidth = 75;
+		dataSizeHeight = 75;
 		// Scale or reconfigure??
 		setupDataCanvas();
 	}
@@ -95,7 +99,8 @@ function inputFile(){
 function configuration() {
 	inputImageResWidth = 350;
 	inputImageResHeight = 350;
-	dataSize = 75; // Cannot be greater than inputImageRes
+	dataSizeWidth = 75; // Cannot be greater than inputImageRes
+	dataSizeHeight = 75; // Cannot be greater than inputImageRes
 	
 	populationSize = 50;
 	polygons = 125;
