@@ -39,15 +39,11 @@ function startGeneticAlgorithm() {
 
 // Sets the targetData by scaling the inputImage to the dataCanvas.
 function setupDataCanvas() {
-	console.log("Trying to setup dataCanvas");
 	inputCanvas.width = dataSizeWidth;
-	console.log("Width " + inputCanvas.width);
 	inputCanvas.height = dataSizeHeight;
-	console.log("Height " + inputCanvas.height);
 	inputContext.drawImage(inputImage, 0, 0, inputImageResWidth, inputImageResHeight, 0, 0, dataSizeWidth, dataSizeHeight);
 	
 	var rescaledImageData = inputContext.getImageData(0, 0, dataSizeWidth, dataSizeHeight).data;
-	console.log(rescaledImageData);
 	
 	targetData = [];
 	for (var i = 0; i < dataSizeWidth * dataSizeHeight * 4; i++) {
@@ -55,11 +51,10 @@ function setupDataCanvas() {
 	}
 	
 	inputCanvas.width = inputImageResWidth;
-	console.log(inputCanvas.width);
 	inputCanvas.height = inputImageResHeight;
-	console.log(inputCanvas.height);
-	inputContext.drawImage(inputImage, 0, 0);
-	console.log(inputImage);	
+	outputCanvas.width = inputImageResWidth;
+	outputCanvas.height = inputImageResHeight;
+	inputContext.drawImage(inputImage, 0, 0);	
 }
 
 // Called through HTML GUI button interaction with the start button.
@@ -94,8 +89,8 @@ function inputFile(){
 			inputImage.src = tempImage.src;
 			inputImageResWidth = inputImage.width;
 			inputImageResHeight = inputImage.height;
-			dataSizeWidth = 75;
-			dataSizeHeight = 75;
+			dataSizeWidth = Math.floor(inputImageResWidth / 4.5); // TODO: math for scales
+			dataSizeHeight = Math.floor(inputImageResHeight / 4.5); // TODO: math for scales
 			// Scale or reconfigure??
 			setupDataCanvas();
 		};
