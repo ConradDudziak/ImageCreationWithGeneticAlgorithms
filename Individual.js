@@ -73,7 +73,7 @@ class Individual {
 			if (Math.random() < mutationRate) {
 				console.log("Mutate polygon position");
 				var childPolygons = child.genes.getPolygons();
-				arraymove(childPolygons, Math.floor(Math.random() * (this.polygonCount + 1)),
+				this.arraymove(childPolygons, Math.floor(Math.random() * (this.polygonCount + 1)),
 				Math.floor(Math.random() * (this.polygonCount + 1)));
 				/*
 				var randIndex = Math.floor(Math.random() * (this.polygonCount + 1));
@@ -88,7 +88,7 @@ class Individual {
 		return child;
 	}
 	
-	function arraymove(arr, fromIndex, toIndex) {
+	arraymove(arr, fromIndex, toIndex) {
 		var element = arr[fromIndex];
 		arr.splice(fromIndex, 1);
 		arr.splice(toIndex, 0, element);
