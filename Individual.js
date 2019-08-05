@@ -71,7 +71,8 @@ class Individual {
 		// Random Chance that a polygon will be moved in the polygon array.
 		if (this.polygonCount > 0) {
 			if (Math.random() < mutationRate) {
-				console.log("Mutate polygon position");
+				console.log("Mutate polygon position: parent polygonCount = " + this.polygonCount);
+				console.log("Mutate polygon position: my polygonCount = " + child.polygonCount);
 				var childPolygons = child.genes.getPolygons();
 				this.arraymove(childPolygons, Math.floor(Math.random() * (this.polygonCount + 1)),
 				Math.floor(Math.random() * (this.polygonCount + 1)));
