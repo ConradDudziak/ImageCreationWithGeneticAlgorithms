@@ -71,17 +71,26 @@ class Individual {
 		// Random Chance that a polygon will be moved in the polygon array.
 		if (parseFloat(this.polygonCount) > 0) {
 			if (Math.random() < mutationRate) {
-				var randIndex = Math.floor(Math.random() * (parseFloat(this.polygonCount) + 1));
-				console.log(randIndex);
+				var childPolygons = child.genes.getPolygons();
+				this.arrayMove(childPolygons, Math.floor(Math.random() * (parseFloat(this.polygonCount) + 1)),
+				Math.floor(Math.random() * (parseFloat(this.polygonCount) + 1)));
+				/*
+				var randIndex = Math.floor(Math.random() * (this.polygonCount + 1));
 				var childPolygons = child.genes.getPolygons();
 				var removedPolygon = childPolygons.splice(randIndex, 1);
 				
-				var randInsertIndex = Math.floor(Math.random() * (parseFloat(this.polygonCount) + 1));
-				console.log(randInsertIndex);
+				var randInsertIndex = Math.floor(Math.random() * (this.polygonCount + 1));
 				childPolygons.splice(randInsertIndex, 0, removedPolygon);
+				*/
 			}
 		}
 		return child;
+	}
+	
+	arrayMove(arr, fromIndex, toIndex) {
+		var element = arr[fromIndex];
+		arr.splice(fromIndex, 1);
+		arr.splice(toIndex, 0, element);
 	}
 	
 	// Mutate a value with a chance of mutationRate.
