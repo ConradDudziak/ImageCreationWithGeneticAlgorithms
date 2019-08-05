@@ -168,6 +168,15 @@ class Population {
 		this.displayData(outputContext, width, height);
 	}
 	
+	checkDirty() {
+		for (var i = 0; i < this.population.length; i++) {
+			if (this.population[i].dirty) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	mutatePopulation() {
 		for (var i = 0; i < this.population.length; i++) {
 			this.population[i].betterMutate(this.mutationRate);
