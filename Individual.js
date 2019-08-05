@@ -90,6 +90,9 @@ class Individual {
 	}
 	
 	arraymove(arr, fromIndex, toIndex) {
+		console.log(arr);
+		console.log(fromIndex);
+		console.log(toIndex);
 		var element = arr[fromIndex];
 		arr.splice(fromIndex, 1);
 		arr.splice(toIndex, 0, element);
