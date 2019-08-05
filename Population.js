@@ -158,12 +158,12 @@ class Population {
 		if (this.checkDirty()) {
 			this.generations++;
 			this.calcFitness();
-			var currentBest = this.best;
+			var currentBest = this.best.fitness;
 			this.evaluate();
 			// If bad progress, reset
 			console.log("current " + parseFloat(currentBest));
-			console.log("new " + parseFloat(this.getBest()));
-			if (currentBest > this.getBest()) {
+			console.log("new " + parseFloat(this.getBest().fitness));
+			if (currentBest > this.getBest().fitness) {
 				this.population = tempPopulation;
 			}
 		}
