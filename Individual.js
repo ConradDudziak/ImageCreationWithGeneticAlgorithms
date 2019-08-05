@@ -32,13 +32,6 @@ class Individual {
 		// Calculate the fitness of this individual by calculating the largest
 		// possible difference and subtracting the ratio from 1.
 		this.fitness = 1 - (sum / (width * height * 4 * 255 * 255));
-		
-		// 1 is perfect fitness.
-		// 0 is worst fitnes?
-		/*
-		console.log("-- My Sum: " + sum);
-		console.log("-- My Fitness: " + this.fitness);
-		*/
 	}
 
 	// Breed this individual with the partner individual, and return a child individual.
@@ -75,12 +68,17 @@ class Individual {
 				childVertices[j].setY(this.mutate(parentVertices[j].getY(), mutationRate));
 			}
 		}
-		/*
-		console.log("***Breeding***");
-		console.log("-- Me: " + this.genes.polygons);
-		console.log("-- Partner: " + partner.genes.polygons);
-		console.log("-- Child: " + child.genes.polygons);
-		*/
+		// Random Chance that a polygon will be moved in the polygon array.
+		if (this.polygonCount > 0) {
+			if (Math.random() < mutationRate) {
+				var randIndex = Math.floor(Math.random() * (this.polygonCount + 1));
+				var childPolygons = child.genes.getPolygons();
+				var removedPolygon = childPolygons.splice(randIndex, 1);
+				
+				var randInsertIndex = Math.floor(Math.random() * (this.polygonCount + 1));
+				childPolygons.splice(randInsertIndex, 0, removedPolygon);
+			}
+		}
 		return child;
 	}
 	
