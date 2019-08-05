@@ -68,6 +68,7 @@ class Individual {
 				childVertices[j].setY(this.mutate(parentVertices[j].getY(), mutationRate));
 			}
 		}
+		
 		// Random Chance that a polygon will be moved in the polygon array.
 		if (parseFloat(this.polygonCount) > 0) {
 			if (Math.random() < mutationRate) {
@@ -76,6 +77,23 @@ class Individual {
 				Math.floor(Math.random() * (parseFloat(this.polygonCount))));
 			}
 		}
+		
+		// Random Chance that a polygon will be added to the polygon array.
+		if (Math.random() < mutationRate) {
+			child.polygonCount = parseFloat(this.polygonCount) + 1;
+			var childPolygons = child.genes.getPolygons();
+			childPolygons.splice(Math.floor(Math.random() * (parseFloat(this.polygonCount))), 0, new Polygon(this.vertexCount));
+		}
+		
+		// Random Chance that a polygon will be removed from the polygon array.
+		if (Math.random() < mutationRate) {
+			if (child.polygonCount > 1) {
+				child.polygonCount = parseFloat(this.polygonCount) - 1;
+				var childPolygons = child.genes.getPolygons();
+				childPolygons.splice(Math.floor(Math.random() * (parseFloat(this.polygonCount))), 1);	
+			}
+		}
+		
 		return child;
 	}
 	
