@@ -161,8 +161,8 @@ class Population {
 			var currentBest = this.best;
 			this.evaluate();
 			// If bad progress, reset
-			console.log("current " + currentBest);
-			console.log("new " + this.getBest());
+			console.log("current " + parseFloat(currentBest));
+			console.log("new " + paseFloat(this.getBest()));
 			if (currentBest > this.getBest()) {
 				this.population = tempPopulation;
 			}
