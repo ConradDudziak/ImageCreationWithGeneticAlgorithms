@@ -164,12 +164,13 @@ class Population {
 			
 			this.evaluate();
 			// If bad progress, reset
-			console.log("current " + parseFloat(currentBest));
+			console.log("current " + parseFloat(this.currentBest));
 			console.log("new " + parseFloat(this.getBest().fitness));
-			if (currentBest > this.getBest().fitness) {
+			if (this.currentBest > this.getBest().fitness) {
 				this.population = tempPopulation;
+				this.evaluate();
 			} else {
-				currentBest = this.getBest().fitness;
+				this.currentBest = this.getBest().fitness;
 			}
 		}
 		this.displayData(outputContext, width, height);
