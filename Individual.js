@@ -129,7 +129,7 @@ class Individual {
 		}
 		
 		// Random Chance that a polygon will be removed from the polygon array.
-		if (Math.random() < mutationRate) {
+		if (Math.random() < mutationRate * 0.5) {
 			if (this.polygonCount > 1) {
 				this.polygonCount = parseFloat(this.polygonCount) - 1;
 				var childPolygons = this.genes.getPolygons();
