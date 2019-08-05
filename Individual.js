@@ -72,10 +72,12 @@ class Individual {
 		if (parseFloat(this.polygonCount) > 0) {
 			if (Math.random() < mutationRate) {
 				var randIndex = Math.floor(Math.random() * (parseFloat(this.polygonCount) + 1));
+				console.log(randIndex);
 				var childPolygons = child.genes.getPolygons();
 				var removedPolygon = childPolygons.splice(randIndex, 1);
 				
 				var randInsertIndex = Math.floor(Math.random() * (parseFloat(this.polygonCount) + 1));
+				console.log(randInsertIndex);
 				childPolygons.splice(randInsertIndex, 0, removedPolygon);
 			}
 		}
