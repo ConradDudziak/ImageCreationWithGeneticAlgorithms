@@ -173,7 +173,7 @@ class Population {
 				this.currentBest = this.population[0].fitness;
 			}
 		}
-		
+		// TODO: glitch when current best was better than mutated result
 		console.log(this.population[0]);
 		this.best = this.population[0];
 		this.displayData(outputContext, width, height);
