@@ -43,7 +43,7 @@ class Individual {
 			// Choose a random gene donor between the parents.
 			var choosePartner = (Math.random() < 0.5);
 			var currentParent = this;
-			if (choosePartner) {
+			if (choosePartner && partner.polygonCount >= this.polygonCount) {
 				currentParent = partner;
 			}
 			
@@ -70,27 +70,27 @@ class Individual {
 		}
 		
 		// Random Chance that a polygon will be moved in the polygon array.
-		if (parseFloat(this.polygonCount) > 0) {
+		if (parseFloat(child.polygonCount) > 0) {
 			if (Math.random() < mutationRate) {
 				var childPolygons = child.genes.getPolygons();
-				this.arrayMove(childPolygons, Math.floor(Math.random() * (parseFloat(this.polygonCount))),
-				Math.floor(Math.random() * (parseFloat(this.polygonCount))));
+				this.arrayMove(childPolygons, Math.floor(Math.random() * (parseFloat(child.polygonCount))),
+				Math.floor(Math.random() * (parseFloat(child.polygonCount))));
 			}
 		}
 		
 		// Random Chance that a polygon will be added to the polygon array.
 		if (Math.random() < mutationRate) {
-			child.polygonCount = parseFloat(this.polygonCount) + 1;
+			child.polygonCount = parseFloat(child.polygonCount) + 1;
 			var childPolygons = child.genes.getPolygons();
-			childPolygons.splice(Math.floor(Math.random() * (parseFloat(this.polygonCount))), 0, new Polygon(this.vertexCount));
+			childPolygons.splice(Math.floor(Math.random() * (parseFloat(child.polygonCount))), 0, new Polygon(this.vertexCount));
 		}
 		
 		// Random Chance that a polygon will be removed from the polygon array.
 		if (Math.random() < mutationRate) {
 			if (child.polygonCount > 1) {
-				child.polygonCount = parseFloat(this.polygonCount) - 1;
+				child.polygonCount = parseFloat(child.polygonCount) - 1;
 				var childPolygons = child.genes.getPolygons();
-				childPolygons.splice(Math.floor(Math.random() * (parseFloat(this.polygonCount))), 1);	
+				childPolygons.splice(Math.floor(Math.random() * (parseFloat(child.polygonCount))), 1);	
 			}
 		}
 		
