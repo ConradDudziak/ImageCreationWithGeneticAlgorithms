@@ -72,7 +72,7 @@ class Individual {
 		if (parseFloat(this.polygonCount) > 0) {
 			if (Math.random() < mutationRate) {
 				var childPolygons = child.genes.getPolygons();
-				this.arrayMove(childPolygons, Math.floor(Math.random() * (parseFloat(this.polygonCount) + 1)),
+				this.moveArrayElement(childPolygons, Math.floor(Math.random() * (parseFloat(this.polygonCount) + 1)),
 				Math.floor(Math.random() * (parseFloat(this.polygonCount) + 1)));
 				/*
 				var randIndex = Math.floor(Math.random() * (this.polygonCount + 1));
@@ -87,10 +87,20 @@ class Individual {
 		return child;
 	}
 	
-	arrayMove(arr, fromIndex, toIndex) {
-		var element = arr[fromIndex];
-		arr.splice(fromIndex, 1);
-		arr.splice(toIndex, 0, element);
+	moveArrayElement(arr, old_index, new_index) {
+		while (old_index < 0) {
+			old_index += arr.length;
+		}
+		while (new_index < 0) {
+			new_index += arr.length;
+		}
+		if (new_index >= arr.length) {
+			var k = new_index - arr.length;
+			while ((k--) + 1) {
+				arr.push(undefined);
+			}
+		}
+		 arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);  
 	}
 	
 	// Mutate a value with a chance of mutationRate.
