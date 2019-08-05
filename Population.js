@@ -173,6 +173,8 @@ class Population {
 				this.currentBest = this.population[0].fitness;
 			}
 		}
+		
+		this.best = this.population[0];
 		this.displayData(outputContext, width, height);
 	}
 	
