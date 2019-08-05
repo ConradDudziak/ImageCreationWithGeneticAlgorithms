@@ -72,23 +72,14 @@ class Individual {
 		if (parseFloat(this.polygonCount) > 0) {
 			if (Math.random() < mutationRate) {
 				var childPolygons = child.genes.getPolygons();
-				this.arrayMove(childPolygons, Math.floor(Math.random() * (parseFloat(this.polygonCount) + 1)),
-				Math.floor(Math.random() * (parseFloat(this.polygonCount) + 1)));
-				/*
-				var randIndex = Math.floor(Math.random() * (this.polygonCount + 1));
-				var childPolygons = child.genes.getPolygons();
-				var removedPolygon = childPolygons.splice(randIndex, 1);
-				
-				var randInsertIndex = Math.floor(Math.random() * (this.polygonCount + 1));
-				childPolygons.splice(randInsertIndex, 0, removedPolygon);
-				*/
+				this.arrayMove(childPolygons, Math.floor(Math.random() * (parseFloat(this.polygonCount))),
+				Math.floor(Math.random() * (parseFloat(this.polygonCount))));
 			}
 		}
 		return child;
 	}
 	
 	arrayMove(arr, fromIndex, toIndex) {
-		console.log(fromIndex + ", " + toIndex);
 		var itemToMove = arr[fromIndex];
 		arr.splice(fromIndex, 1);
 		arr.splice(toIndex, 0, itemToMove);
