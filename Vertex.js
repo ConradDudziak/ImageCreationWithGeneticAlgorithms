@@ -10,6 +10,13 @@ class Vertex {
 		}
 	}
 	
+	clone() {
+		var result = new Vertex();
+		result.x = this.x;
+		result.y = this.y;
+		return result;
+	}
+	
 	// Return this vertex's x value.
 	getX() {
 		return this.x;

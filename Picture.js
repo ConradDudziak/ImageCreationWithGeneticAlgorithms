@@ -2,7 +2,8 @@ class Picture {
 	// Construct a random Picture
 	constructor(polygonCount, vertexCount) {
 		this.polygons = [];
-		
+		this.vertexCount = vertexCount;
+	
 		for (var i = 0; i < polygonCount; i++) {
 			this.polygons[i] = new Polygon(vertexCount);
 		}
@@ -11,6 +12,14 @@ class Picture {
 	// Returns the polygon array of this Picture
 	getPolygons() {
 		return this.polygons;
+	}
+	
+	clone() {
+		var result = new Picture(this.polygons.length, this.vertexCount);
+		for (var i = 0; i < this.polygons.length; i++) {
+			result.polygons[i] = this.polygons[i].clone();
+		}
+		return result;
 	}
 
 	// Draws the array of polygons to the given canvasContext with width and height.

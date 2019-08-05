@@ -16,6 +16,19 @@ class Polygon {
 		}
 	}
 	
+	clone() {
+		var result = new Polygon(this.npoints);
+		result.red = this.red;
+		result.green = this.green;
+		result.blue = this.blue;
+		result.alpha = this.alpha;
+		
+		for (var i = 0; i < this.vertices.length; i++) {
+			result.vertices[i] = this.vertices[i].clone();
+		}
+		return result;
+	}
+	
 	// Return the vertex list of this Polygon.
 	getVertices() {
 		return this.vertices;

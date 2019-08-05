@@ -25,7 +25,7 @@ class Population {
 		this.mutationRate = mutationRate;
 		this.perfectScore = 1;
 		this.targetData = targetData;
-
+		
 		this.best = null;
 		
 		// Populate the population with random Individuals.
@@ -150,6 +150,36 @@ class Population {
 		this.calcFitness();
 		this.evaluate();
 		this.displayData(outputContext, width, height);
+	}
+	
+	betterGenerate(outputContext, width, height) {
+		var tempPopulation = this.clonePopulation();
+		this.mutatePopulation();
+		if (this.checkDirty()) {
+			this.generations++;
+			this.calcFitness();
+			var currentBest = this.best;
+			this.evaluate();
+			// If bad progress, reset
+			if (currentBest > this.best()) {
+				this.population = tempPopulation;
+			}
+		}
+		this.displayData(outputContext, width, height);
+	}
+	
+	mutatePopulation() {
+		for (var i = 0; i < this.population.length; i++) {
+			this.population[i].betterMutate(this.mutationRate);
+		}
+	}
+	
+	clonePopulation() {
+		var result = [];
+		for (var i = 0; i < this.populationSize; i++) {
+			result[i] = this.population[i].clone();
+		}
+		return result;
 	}
 	
 	// Outputs the current best individual of the population to the outputCanvas.
