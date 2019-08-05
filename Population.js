@@ -26,6 +26,8 @@ class Population {
 		this.perfectScore = 1;
 		this.targetData = targetData;
 		
+		this.currentBest = 0;
+		
 		this.best = null;
 		
 		// Populate the population with random Individuals.
@@ -154,17 +156,11 @@ class Population {
 	
 	betterGenerate(outputContext, width, height) {
 		var tempPopulation = this.clonePopulation();
+		
 		this.mutatePopulation();
 		if (this.checkDirty()) {
 			this.generations++;
 			this.calcFitness();
-			
-			var currentBest;
-			if (this.best == null) {
-				currentBest = 0;
-			} else {
-				currentBest = this.best.fitness;
-			}
 			
 			this.evaluate();
 			// If bad progress, reset
@@ -172,6 +168,8 @@ class Population {
 			console.log("new " + parseFloat(this.getBest().fitness));
 			if (currentBest > this.getBest().fitness) {
 				this.population = tempPopulation;
+			} else {
+				currentBest = this.getBest().fitness;
 			}
 		}
 		this.displayData(outputContext, width, height);
