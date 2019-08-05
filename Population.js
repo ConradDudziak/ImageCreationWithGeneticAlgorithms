@@ -174,6 +174,7 @@ class Population {
 			}
 		}
 		
+		console.log(this.population[0]);
 		this.best = this.population[0];
 		this.displayData(outputContext, width, height);
 	}
