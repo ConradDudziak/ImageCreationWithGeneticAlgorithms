@@ -30,6 +30,10 @@ var populationSize;
 var polygons;
 var vertices;
 
+var generationsElement;
+var avgFitnessElement;
+var bestFitnessElement;
+
 // Create an instance of the population and iterate
 // over its generations.
 function startGeneticAlgorithm() {
@@ -39,6 +43,9 @@ function startGeneticAlgorithm() {
 								mutationRate, populationSize);
 	function iterate() {
 		population.generate(outputContext, inputImageResWidth, inputImageResHeight);
+		generationsElement.innerHTML = population.getGenerations();
+		avgFitnessElement.innerHTML = population.getAverageFitness();
+		bestFitnessElement.innerHTML = population.getBest().fitness;
 	}
 	
 	currentInterval = setInterval(iterate, 0);
@@ -166,6 +173,10 @@ function boot() {
 	vertexCountInput = document.getElementById("vertexCount");
 	mutationRateInput = document.getElementById("mutationRate");
 	resolutionScaleFactorInput = document.getElementById("resolutionScaleFactor");
+	
+	generationsElement = document.getElementById("generations");
+	avgFitnessElement = document.getElementById("avgFitness");
+	bestFitnessElement = document.getElementById("bestFitness");
 	
 	configuration();
 	
