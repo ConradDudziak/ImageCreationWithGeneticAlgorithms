@@ -158,7 +158,7 @@ class Individual {
 			var currentVertices = currentPolygon.getVertices();
 			// Set the vertex values of the child polygon to be the mutated values of
 			// the parents polygon.
-			for (var j = 0; j < parentVertices.length; j++) {
+			for (var j = 0; j < currentVertices.length; j++) {
 				currentVertices[j].setX(this.mutate(currentVertices[j].getX(), mutationRate));
 				currentVertices[j].setY(this.mutate(currentVertices[j].getY(), mutationRate));
 			}
