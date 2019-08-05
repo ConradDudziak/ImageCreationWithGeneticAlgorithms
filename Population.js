@@ -162,15 +162,15 @@ class Population {
 			this.generations++;
 			this.calcFitness();
 			
-			this.evaluate();
+			//this.evaluate();
 			// If bad progress, reset
-			console.log("current " + parseFloat(this.currentBest));
-			console.log("new " + parseFloat(this.getBest().fitness));
-			if (this.currentBest > this.getBest().fitness) {
+			console.log("mutatedresult " + parseFloat(this.population[0].fitness));
+			console.log("currentbest " + parseFloat(this.currentBest));
+			if (this.currentBest > this.population[0].fitness) {
 				this.population = tempPopulation;
-				this.evaluate();
+				//this.evaluate();
 			} else {
-				this.currentBest = this.getBest().fitness;
+				this.currentBest = this.population[0].fitness;
 			}
 		}
 		this.displayData(outputContext, width, height);
