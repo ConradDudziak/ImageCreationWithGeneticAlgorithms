@@ -161,7 +161,7 @@ class Population {
 			var currentBest = this.best;
 			this.evaluate();
 			// If bad progress, reset
-			if (currentBest > this.best()) {
+			if (currentBest > this.getBest()) {
 				this.population = tempPopulation;
 			}
 		}
