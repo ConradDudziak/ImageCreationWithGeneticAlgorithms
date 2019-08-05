@@ -39,7 +39,6 @@ function startGeneticAlgorithm() {
 								mutationRate, populationSize);
 	function iterate() {
 		population.generate(outputContext, inputImageResWidth, inputImageResHeight);
-		//population.betterGenerate(outputContext, inputImageResWidth, inputImageResHeight);
 	}
 	
 	currentInterval = setInterval(iterate, 0);

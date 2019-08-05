@@ -25,9 +25,7 @@ class Population {
 		this.mutationRate = mutationRate;
 		this.perfectScore = 1;
 		this.targetData = targetData;
-		
-		this.currentBest = 0;
-		
+
 		this.best = null;
 		
 		// Populate the population with random Individuals.
@@ -152,54 +150,6 @@ class Population {
 		this.calcFitness();
 		this.evaluate();
 		this.displayData(outputContext, width, height);
-	}
-	
-	betterGenerate(outputContext, width, height) {
-		var tempPopulation = this.clonePopulation();
-		
-		this.mutatePopulation();
-		if (this.checkDirty()) {
-			this.generations++;
-			this.calcFitness();
-			
-			//this.evaluate();
-			// If bad progress, reset
-			console.log("mutatedresult " + parseFloat(this.population[0].fitness));
-			console.log("currentbest " + parseFloat(this.currentBest));
-			if (this.currentBest > this.population[0].fitness) {
-				this.population = tempPopulation;
-				//this.evaluate();
-			} else {
-				this.currentBest = this.population[0].fitness;
-			}
-		}
-		// TODO: glitch when current best was better than mutated result
-		console.log(this.population[0]);
-		this.best = this.population[0];
-		this.displayData(outputContext, width, height);
-	}
-	
-	checkDirty() {
-		for (var i = 0; i < this.population.length; i++) {
-			if (this.population[i].dirty) {
-				return true;
-			}
-		}
-		return false;
-	}
-	
-	mutatePopulation() {
-		for (var i = 0; i < this.population.length; i++) {
-			this.population[i].betterMutate(this.mutationRate);
-		}
-	}
-	
-	clonePopulation() {
-		var result = [];
-		for (var i = 0; i < this.populationSize; i++) {
-			result[i] = this.population[i].clone();
-		}
-		return result;
 	}
 	
 	// Outputs the current best individual of the population to the outputCanvas.
