@@ -92,6 +92,9 @@ class Individual {
 		var element = arr[fromIndex];
 		arr.splice(fromIndex, 1);
 		arr.splice(toIndex, 0, element);
+		console.log(arr);
+		console.log(fromIndex);
+		console.log(toIndex);
 	}
 	
 	// Mutate a value with a chance of mutationRate.
